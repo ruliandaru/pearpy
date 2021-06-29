@@ -1,0 +1,1 @@
+pyside2-uic.exe .\layout.ui -o .\pearpy\gui\view\layout.py

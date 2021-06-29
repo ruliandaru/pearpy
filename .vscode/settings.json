@@ -1,0 +1,27 @@
+{
+    "python.analysis.typeCheckingMode": "basic",
+    "cSpell.words": [
+        "tqdm"
+    ],
+    "cSpell.ignoreWords": [
+        "arange",
+        "crossttabll",
+        "data",
+        "dsm",
+        "dsm registrasi",
+        "dtype",
+        "laharz",
+        "ndarray",
+        "nodatavals",
+        "planimetric",
+        "planimetric data",
+        "planimetrics",
+        "pydantic",
+        "rasterio",
+        "registrasi",
+        "tkglxm",
+        "ulang"
+    ],
+    "python.formatting.provider": "black",
+    "python.pythonPath": ".venv\\Scripts\\python.exe"
+}
