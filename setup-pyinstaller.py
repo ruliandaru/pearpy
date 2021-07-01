@@ -24,6 +24,7 @@ if __name__ == "__main__":
             "--hidden-import=rasterio.control",
             "--hidden-import=rasterio.sample",
             "--hidden-import=rasterio.vrt",
+            "--hidden-import=rasterio.rpc",
             "--hidden-import=rasterio._features",
             "--hidden-import=fiona._shim",
             "--hidden-import=fiona.schema",
