@@ -1,2 +1,2 @@
-# claret
- Automatic Laharz Parameter Generator
+# Pearpy
+Parameter estimation and Laharzpy
