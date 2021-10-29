@@ -16,6 +16,18 @@ from .textfile import py_xxplanb, py_xxsecta, py_xxttabl
 
 
 def text2list(file_name: str) -> List[List[float]]:
+    """Parse coordinate and volume into list
+
+    Parameters
+    ----------
+    file_name : str
+        coordinate and volume file
+
+    Returns
+    -------
+    List[List[float]]
+        [[coordinate_x, coordinate_y, volume]]
+    """
     with open(file_name) as input_file:
         dataset: List[List[float]] = [
             [round(float(coordinate)) for coordinate in line.split(",")]
@@ -81,6 +93,13 @@ next_cell: Dict[int, Tuple[int, int]] = {
 
 
 class CrossSectionTooLong(Exception):
+    """Exception called if volume is too big which caused the cross section too long.
+
+    Parameters
+    ----------
+    Exception : [type]
+        [description]
+    """
     pass
 
 
@@ -93,6 +112,8 @@ class DEMData:
 
 @dataclass
 class PlanimetricData:
+    """Planimetric area information and function
+    """
     value: List[float]
     array: np.ndarray
     cross_area: List[float]
@@ -101,12 +122,17 @@ class PlanimetricData:
     last_count: int = 0
 
     def __post_init__(self) -> None:
+        """create a copy of original to reset the data after move downward
+        """
         self.cross_area_ori = self.cross_area.copy()
 
     def restore(self) -> None:
+        """reset the data after move downward
+        """
         self.cross_area = self.cross_area_ori.copy()
 
     def pop_cross(self) -> None:
+        """pop cross area"""
         self.cross_area.pop()
         self.cross_area_ori = self.cross_area
 
@@ -114,6 +140,20 @@ class PlanimetricData:
 def calc_area(
     volume_list: Union[List[int], List[float]], coefficient: float
 ) -> List[float]:
+    """calculatte the planimetric area based on volume
+
+    Parameters
+    ----------
+    volume_list : Union[List[int], List[float]]
+        volumes
+    coefficient : float
+        area coefficient
+
+    Returns
+    -------
+    List[float]
+        List of volume
+    """
     return [round(volume ** 0.666666666666666 * coefficient) for volume in volume_list]
 
 
@@ -122,6 +162,22 @@ def calc_confidence_limit(
     user_volume: Union[int, float],
     confidence_limit: float,
 ) -> Tuple[float, float]:
+    """Calculate area based on defined confidence limit
+
+    Parameters
+    ----------
+    is_cross_section : bool
+        cross or long section
+    user_volume : Union[int, float]
+        user volume
+    confidence_limit : float
+        confidence limit
+
+    Returns
+    -------
+    Tuple[float, float]
+        volumes
+    """
 
     an_intercept = 2.301
     dec_intercept = 200.0
@@ -178,6 +234,18 @@ def calc_confidence_limit(
 
 
 def calc_cell_dimension(dem: rasterio.DatasetReader) -> Tuple[float, float]:
+    """calculate cell diagonal and width
+
+    Parameters
+    ----------
+    dem : rasterio.DatasetReader
+        DEM file read by rasterio
+
+    Returns
+    -------
+    Tuple[float, float]
+        width and diagonal
+    """
     width = dem.transform[0]
     diagonal = round(sqrt((width ** 2) * 2) * 100) / 100
     return width, diagonal
@@ -186,6 +254,22 @@ def calc_cell_dimension(dem: rasterio.DatasetReader) -> Tuple[float, float]:
 def append_point2array(
     row: int, col: int, planimetrics: PlanimetricData
 ) -> PlanimetricData:
+    """
+
+    Parameters
+    ----------
+    row : int
+        [description]
+    col : int
+        [description]
+    planimetrics : PlanimetricData
+        [description]
+
+    Returns
+    -------
+    PlanimetricData
+        [description]
+    """
     cross_area_count = len(planimetrics.cross_area) + 1
     dem_value = planimetrics.array[row, col]
 
@@ -208,6 +292,28 @@ def get_next_cell(
     dem_array: np.ndarray,
     no_data: float = 99999.0,
 ) -> Tuple[int, int, Union[int, float]]:
+    """get next cell whether left or downward
+
+    Parameters
+    ----------
+    row : int
+    col : int
+    cell_side : int
+    flow_direction : int
+    dem_array : np.ndarray
+    no_data : float, optional
+        no data, by default 99999.0
+
+    Returns
+    -------
+    Tuple[int, int, Union[int, float]]
+        row, col, elevation
+
+    Raises
+    ------
+    ValueError
+        Flow doesn't follow d8 flow style
+    """
     if flow_direction in [1, 2, 4, 8, 16, 32, 64, 128]:
         row_operator, col_operator = next_cell[flow_direction]
     else:
@@ -233,6 +339,26 @@ def create_cross_area(
     cross_areas: List[float],
     cell_count: int = 1,
 ) -> List[float]:
+    """calculate the cross area of lahar inundation
+
+    Parameters
+    ----------
+    first_elevation : float
+        first elevation
+    second_elevation : float
+        second elevation
+    cell_dimension : float
+        width
+    cross_areas : List[float]
+        list of cross areas
+    cell_count : int, optional
+        [description], by default 1
+
+    Returns
+    -------
+    List[float]
+        [description]
+    """
     cross_areas = [
         area - ((first_elevation - second_elevation) * (cell_dimension * cell_count))
         for area in cross_areas

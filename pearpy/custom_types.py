@@ -17,11 +17,25 @@ else:
 
 
 class GeoJsonGeometryDict(TypedDict):
+    """Typing for geojson geometry
+
+    Parameters
+    ----------
+    TypedDict : [type]
+        [description]
+    """
     type: str
     coordinates: List[Union[Tuple[float, float], Tuple[float, float, float]]]
 
 
 class GeoJsonDict(TypedDict):
+    """Typing for geojson
+
+    Parameters
+    ----------
+    TypedDict : [type]
+        [description]
+    """
     type: str
     id: str
     properties: "OrderedDict[str, Any]"
@@ -29,6 +43,13 @@ class GeoJsonDict(TypedDict):
 
 
 class RasterioMeta(TypedDict):
+    """Typing for rasterio metadata
+
+    Parameters
+    ----------
+    TypedDict : [type]
+        [description]
+    """
     count: int
     crs: CRS
     driver: str

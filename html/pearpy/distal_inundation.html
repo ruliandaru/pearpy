@@ -1,0 +1,2090 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>pearpy.distal_inundation API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>pearpy.distal_inundation</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from collections import OrderedDict
+from dataclasses import dataclass, field
+from math import log10, sqrt
+from pathlib import Path
+from typing import Callable, Dict, List, Optional, Tuple, Union
+
+import fiona
+import numpy as np
+import rasterio
+from geosardine.raster import polygonize
+from tqdm.autonotebook import tqdm
+
+from pearpy.custom_types import RasterioMeta
+
+from .textfile import py_xxplanb, py_xxsecta, py_xxttabl
+
+
+def text2list(file_name: str) -&gt; List[List[float]]:
+    &#34;&#34;&#34;Parse coordinate and volume into list
+
+    Parameters
+    ----------
+    file_name : str
+        coordinate and volume file
+
+    Returns
+    -------
+    List[List[float]]
+        [[coordinate_x, coordinate_y, volume]]
+    &#34;&#34;&#34;
+    with open(file_name) as input_file:
+        dataset: List[List[float]] = [
+            [round(float(coordinate)) for coordinate in line.split(&#34;,&#34;)]
+            for line in input_file
+            if &#34;,&#34; in line
+        ]
+
+    return sorted(dataset)
+
+
+cardinal_first = {32: (16, 64), 128: (64, 1), 2: (1, 4), 8: (4, 16)}
+cardinal_second = {1: (128, 2), 4: (2, 8), 16: (8, 32), 64: (32, 128)}
+
+checker_board: Dict[int, Callable[[int, int], Tuple[int, int]]] = {
+    8: lambda r, c: (r + 1, c),
+    32: lambda r, c: (r, c - 1),
+    128: lambda r, c: (r - 1, c),
+    2: lambda r, c: (r, c + 1),
+}
+
+confidence2index = {
+    &#34;50.0&#34;: 1,
+    &#34;70.0&#34;: 2,
+    &#34;80.0&#34;: 3,
+    &#34;90.0&#34;: 4,
+    &#34;95.0&#34;: 5,
+    &#34;97.5&#34;: 6,
+    &#34;99.0&#34;: 7,
+}
+
+left_cell: Dict[int, Callable[[int, int], Tuple[int, int]]] = {
+    1: lambda r, c: (r - 1, c),
+    2: lambda r, c: (r - 1, c + 1),
+    4: lambda r, c: (r, c + 1),
+    8: lambda r, c: (r + 1, c + 1),
+    16: lambda r, c: (r + 1, c),
+    32: lambda r, c: (r + 1, c - 1),
+    64: lambda r, c: (r, c - 1),
+    128: lambda r, c: (r - 1, c - 1),
+}
+
+move_downstream: Dict[int, Callable[[int, int], Tuple[int, int]]] = {
+    1: lambda r, c: (r, c + 1),
+    2: lambda r, c: (r + 1, c + 1),
+    4: lambda r, c: (r + 1, c),
+    8: lambda r, c: (r + 1, c - 1),
+    16: lambda r, c: (r, c - 1),
+    32: lambda r, c: (r - 1, c - 1),
+    64: lambda r, c: (r - 1, c),
+    128: lambda r, c: (r - 1, c + 1),
+}
+
+next_cell: Dict[int, Tuple[int, int]] = {
+    1: (-1, 0),
+    2: (-1, 1),
+    4: (0, 1),
+    8: (1, 1),
+    16: (1, 0),
+    32: (1, -1),
+    64: (0, -1),
+    128: (-1, -1),
+}
+
+
+class CrossSectionTooLong(Exception):
+    &#34;&#34;&#34;Exception called if volume is too big which caused the cross section too long.
+
+    Parameters
+    ----------
+    Exception : [type]
+        [description]
+    &#34;&#34;&#34;
+    pass
+
+
+@dataclass
+class DEMData:
+    array: np.ndarray
+    cell_diagonal: float
+    cell_width: float
+
+
+@dataclass
+class PlanimetricData:
+    &#34;&#34;&#34;Planimetric area information and function
+    &#34;&#34;&#34;
+    value: List[float]
+    array: np.ndarray
+    cross_area: List[float]
+    cross_area_ori: List[float] = field(default_factory=list)
+    previous_count: int = 0
+    last_count: int = 0
+
+    def __post_init__(self) -&gt; None:
+        &#34;&#34;&#34;create a copy of original to reset the data after move downward
+        &#34;&#34;&#34;
+        self.cross_area_ori = self.cross_area.copy()
+
+    def restore(self) -&gt; None:
+        &#34;&#34;&#34;reset the data after move downward
+        &#34;&#34;&#34;
+        self.cross_area = self.cross_area_ori.copy()
+
+    def pop_cross(self) -&gt; None:
+        &#34;&#34;&#34;pop cross area&#34;&#34;&#34;
+        self.cross_area.pop()
+        self.cross_area_ori = self.cross_area
+
+
+def calc_area(
+    volume_list: Union[List[int], List[float]], coefficient: float
+) -&gt; List[float]:
+    &#34;&#34;&#34;calculatte the planimetric area based on volume
+
+    Parameters
+    ----------
+    volume_list : Union[List[int], List[float]]
+        volumes
+    coefficient : float
+        area coefficient
+
+    Returns
+    -------
+    List[float]
+        List of volume
+    &#34;&#34;&#34;
+    return [round(volume ** 0.666666666666666 * coefficient) for volume in volume_list]
+
+
+def calc_confidence_limit(
+    is_cross_section: bool,
+    user_volume: Union[int, float],
+    confidence_limit: float,
+) -&gt; Tuple[float, float]:
+    &#34;&#34;&#34;Calculate area based on defined confidence limit
+
+    Parameters
+    ----------
+    is_cross_section : bool
+        cross or long section
+    user_volume : Union[int, float]
+        user volume
+    confidence_limit : float
+        confidence limit
+
+    Returns
+    -------
+    Tuple[float, float]
+        volumes
+    &#34;&#34;&#34;
+
+    an_intercept = 2.301
+    dec_intercept = 200.0
+    fills = py_xxplanb
+    if is_cross_section:
+        an_intercept = -1.301
+        dec_intercept = 0.05
+        fills = py_xxsecta
+
+    residual_sum = 0.0
+    total_log_volume = 0.0
+
+    for (_, volume, area) in fills:
+        log_vol = log10(volume)
+        total_log_volume += log_vol
+
+        log_area_y = log10(area)
+        log_area_pred = (log_vol * 0.666666666667) + an_intercept
+        diff = (log_area_y - log_area_pred) * (log_area_y - log_area_pred)
+        residual_sum += diff
+
+    se_model = sqrt(residual_sum / (len(fills) - 1))
+    mean_log_volume = total_log_volume / len(fills)
+
+    mean_diff_total = 0.0
+    one_over_n = 1.0 / len(fills)
+
+    for (_, volume, area) in fills:
+        log_vol = log10(volume)
+        diff_log_mean = log_vol - mean_log_volume
+        diff_squared = diff_log_mean ** 2
+
+        mean_diff_total += diff_squared
+
+    crossttabll = py_xxttabl[len(fills) - 2]
+    cross_section_data = crossttabll[confidence2index[str(confidence_limit)]]
+
+    area_up: float = 0.0
+    area_dn: float = 0.0
+    if cross_section_data is not None:
+        log_user_volume = log10(user_volume)
+        user_regress_area = round((user_volume ** 0.66666666666667) * dec_intercept)
+
+        diff_mean = log_user_volume - mean_log_volume
+        diff_mean_sq = diff_mean ** 2
+
+        sem = se_model * sqrt(one_over_n + (diff_mean_sq / mean_diff_total))
+        sep = sqrt((se_model ** 2) + (sem ** 2))
+
+        area_up = 10 ** ((cross_section_data * sep) + log10(user_regress_area))
+        area_dn = 10 ** (log10(user_regress_area) - (cross_section_data * sep))
+
+    return area_up, area_dn
+
+
+def calc_cell_dimension(dem: rasterio.DatasetReader) -&gt; Tuple[float, float]:
+    &#34;&#34;&#34;calculate cell diagonal and width
+
+    Parameters
+    ----------
+    dem : rasterio.DatasetReader
+        DEM file read by rasterio
+
+    Returns
+    -------
+    Tuple[float, float]
+        width and diagonal
+    &#34;&#34;&#34;
+    width = dem.transform[0]
+    diagonal = round(sqrt((width ** 2) * 2) * 100) / 100
+    return width, diagonal
+
+
+def append_point2array(
+    row: int, col: int, planimetrics: PlanimetricData
+) -&gt; PlanimetricData:
+    &#34;&#34;&#34;
+
+    Parameters
+    ----------
+    row : int
+        [description]
+    col : int
+        [description]
+    planimetrics : PlanimetricData
+        [description]
+
+    Returns
+    -------
+    PlanimetricData
+        [description]
+    &#34;&#34;&#34;
+    cross_area_count = len(planimetrics.cross_area) + 1
+    dem_value = planimetrics.array[row, col]
+
+    if dem_value == 1:
+        planimetrics.array[row, col] = cross_area_count
+        planimetrics.value[cross_area_count - 2] += 1
+    elif dem_value &lt; cross_area_count:
+        planimetrics.array[row, col] = cross_area_count
+        planimetrics.value[dem_value - 2] -= 1
+        planimetrics.value[cross_area_count - 2] += 1
+
+    return planimetrics
+
+
+def get_next_cell(
+    row: int,
+    col: int,
+    cell_side: int,
+    flow_direction: int,
+    dem_array: np.ndarray,
+    no_data: float = 99999.0,
+) -&gt; Tuple[int, int, Union[int, float]]:
+    &#34;&#34;&#34;get next cell whether left or downward
+
+    Parameters
+    ----------
+    row : int
+    col : int
+    cell_side : int
+    flow_direction : int
+    dem_array : np.ndarray
+    no_data : float, optional
+        no data, by default 99999.0
+
+    Returns
+    -------
+    Tuple[int, int, Union[int, float]]
+        row, col, elevation
+
+    Raises
+    ------
+    ValueError
+        Flow doesn&#39;t follow d8 flow style
+    &#34;&#34;&#34;
+    if flow_direction in [1, 2, 4, 8, 16, 32, 64, 128]:
+        row_operator, col_operator = next_cell[flow_direction]
+    else:
+        raise ValueError(f&#34;Bad flow direction {flow_direction}&#34;)
+
+    original_x, original_y = row, col
+    row += cell_side * row_operator
+    col += cell_side * col_operator
+
+    try:
+        elevation = dem_array[row, col]
+    except IndexError:
+        row, col = original_x, original_y
+        elevation = no_data
+
+    return row, col, elevation
+
+
+def create_cross_area(
+    first_elevation: float,
+    second_elevation: float,
+    cell_dimension: float,
+    cross_areas: List[float],
+    cell_count: int = 1,
+) -&gt; List[float]:
+    &#34;&#34;&#34;calculate the cross area of lahar inundation
+
+    Parameters
+    ----------
+    first_elevation : float
+        first elevation
+    second_elevation : float
+        second elevation
+    cell_dimension : float
+        width
+    cross_areas : List[float]
+        list of cross areas
+    cell_count : int, optional
+        [description], by default 1
+
+    Returns
+    -------
+    List[float]
+        [description]
+    &#34;&#34;&#34;
+    cross_areas = [
+        area - ((first_elevation - second_elevation) * (cell_dimension * cell_count))
+        for area in cross_areas
+    ]
+    if len(cross_areas) &gt; 1:
+        # Remove negative value
+        cross_areas = list(filter(lambda x: x &gt; 0, cross_areas))
+    return cross_areas
+
+
+def calc_cross_section(
+    dem: DEMData,
+    flow_direction: int,
+    row_col: Tuple[int, int],
+    planimetrics: PlanimetricData,
+) -&gt; PlanimetricData:
+    cell_dimension = dem.cell_width
+    if flow_direction in [8, 128, 2, 32]:
+        cell_dimension = dem.cell_diagonal
+
+    right_x, right_y = row_col
+
+    if flow_direction not in [1, 2, 4, 8, 16, 32, 64, 128]:
+        raise ValueError(f&#34;out of bound, direction: {flow_direction}&#34;)
+    left_x, left_y = left_cell[flow_direction](right_x, right_y)
+
+    try:
+        left_elevation = dem.array[left_x, left_y]
+        right_elevation = dem.array[right_x, right_y]
+    except IndexError:
+        return planimetrics
+
+    fill_elevation = right_elevation
+    count = 0
+    cell_norm = 1
+    cell_wneg = -1
+    cell_count = 0
+
+    while (
+        count &lt; 1000000000
+        and planimetrics.cross_area
+        and planimetrics.cross_area[0] &gt; 0
+    ):
+        if left_elevation == fill_elevation:
+            planimetrics = append_point2array(left_x, left_y, planimetrics)
+            left_x, left_y, left_elevation = get_next_cell(
+                left_x, left_y, cell_norm, flow_direction, dem.array
+            )
+            cell_count += 1
+        elif right_elevation == fill_elevation:
+            planimetrics = append_point2array(right_x, right_y, planimetrics)
+            right_x, right_y, right_elevation = get_next_cell(
+                right_x, right_y, cell_wneg, flow_direction, dem.array
+            )
+            cell_count += 1
+
+        elif right_elevation &lt; fill_elevation:
+            planimetrics.cross_area = create_cross_area(
+                fill_elevation, right_elevation, cell_dimension, planimetrics.cross_area
+            )
+            cell_count += 1
+            if planimetrics.cross_area and planimetrics.cross_area[0] &gt; 0:
+                planimetrics = append_point2array(right_x, right_y, planimetrics)
+                right_x, right_y, right_elevation = get_next_cell(
+                    right_x, right_y, cell_wneg, flow_direction, dem.array
+                )
+
+        elif left_elevation &lt; fill_elevation:
+            planimetrics.cross_area = create_cross_area(
+                fill_elevation, left_elevation, cell_dimension, planimetrics.cross_area
+            )
+            cell_count += 1
+            if planimetrics.cross_area and planimetrics.cross_area[0] &gt; 0:
+                planimetrics = append_point2array(left_x, left_y, planimetrics)
+                left_x, left_y, left_elevation = get_next_cell(
+                    left_x, left_y, cell_norm, flow_direction, dem.array
+                )
+
+        elif right_elevation == left_elevation:
+            planimetrics.cross_area = create_cross_area(
+                right_elevation,
+                fill_elevation,
+                cell_dimension,
+                planimetrics.cross_area,
+                cell_count,
+            )
+
+            if planimetrics.cross_area and planimetrics.cross_area[0] &gt; 0:
+                fill_elevation = right_elevation
+                planimetrics = append_point2array(left_x, left_y, planimetrics)
+                left_x, left_y, left_elevation = get_next_cell(
+                    left_x, left_y, cell_norm, flow_direction, dem.array
+                )
+
+                planimetrics = append_point2array(right_x, right_y, planimetrics)
+                right_x, right_y, right_elevation = get_next_cell(
+                    right_x, right_y, cell_wneg, flow_direction, dem.array
+                )
+                cell_count += 2
+
+        elif right_elevation &gt; left_elevation:
+            planimetrics.cross_area = create_cross_area(
+                left_elevation,
+                fill_elevation,
+                cell_dimension,
+                planimetrics.cross_area,
+                cell_count,
+            )
+            cell_count += 1
+            if planimetrics.cross_area and planimetrics.cross_area[0] &gt; 0:
+                fill_elevation = left_elevation
+                planimetrics = append_point2array(left_x, left_y, planimetrics)
+                left_x, left_y, left_elevation = get_next_cell(
+                    left_x, left_y, cell_norm, flow_direction, dem.array
+                )
+
+        elif right_elevation &lt; left_elevation:
+            planimetrics.cross_area = create_cross_area(
+                right_elevation,
+                fill_elevation,
+                cell_dimension,
+                planimetrics.cross_area,
+                cell_count,
+            )
+            cell_count += 1
+            if planimetrics.cross_area and planimetrics.cross_area[0] &gt; 0:
+                fill_elevation = right_elevation
+                planimetrics = append_point2array(right_x, right_y, planimetrics)
+                right_x, right_y, left_elevation = get_next_cell(
+                    right_x, right_y, cell_wneg, flow_direction, dem.array
+                )
+
+        if left_elevation == 99999.0 or right_elevation == 99999.0:
+            planimetrics.cross_area = [-99999 for _ in planimetrics.cross_area]
+
+        count += 1
+    planimetrics.restore()
+    return planimetrics
+
+
+def read_volumes(volume_file: Union[Path, str]) -&gt; List[int]:
+    with open(volume_file) as volume_reader:
+        volumes = [round(float(line)) for line in volume_reader]
+    return volumes
+
+
+# def read_coordinates(coordinates_file: Union[Path, str]) -&gt; List[List[int]]:
+#     with open(coordinates_file) as coordinate_reader:
+#         coordinates = []
+#         for line in coordinate_reader:
+#             if &#34;,&#34; in line:
+#                 coordinate = [round(float(c)) for c in line.split(&#34;,&#34;)]
+#                 coordinates.append(coordinate)
+#     return sorted(coordinates)
+
+
+def calc_cross_planimetric(
+    volumes: List[int], confidence_limit: float
+) -&gt; Tuple[List[float], List[float]]:
+    cross_section_areas = calc_area(volumes, 0.05)
+    planimetric_areas = calc_area(volumes, 200)
+
+    cross_section_area1, cross_section_area3 = calc_confidence_limit(
+        True, volumes[0], confidence_limit
+    )
+
+    planimetric_area1, planimetric_area3 = calc_confidence_limit(
+        False, volumes[0], confidence_limit
+    )
+
+    cross_section_areas += [round(cross_section_area1), round(cross_section_area3)]
+    planimetric_areas += [round(planimetric_area1), round(planimetric_area3)]
+
+    return sorted(cross_section_areas, reverse=True), sorted(
+        planimetric_areas, reverse=True
+    )
+
+
+@dataclass
+class StartPoint:
+    coordinate: List[int]
+    volume: int
+
+    @property
+    def x(self) -&gt; int:
+        return self.coordinate[0]
+
+    @property
+    def y(self) -&gt; int:
+        return self.coordinate[1]
+
+    def to_rowcol(
+        self, up_right_y: float, low_left_x: float, cell_width: float
+    ) -&gt; None:
+        row = int((up_right_y - self.y) / cell_width)
+        col = int((self.x - low_left_x) / cell_width)
+        self.row: int = row
+        self.col: int = col
+
+
+def read_coordinates(file_location: str, input_volume: int = -1) -&gt; List[StartPoint]:
+    coordinates: List[StartPoint] = []
+    with open(file_location) as file:
+        for line in file.readlines():
+            if &#34;,&#34; in line:
+                coordinate = [round(float(c)) for c in line.split(&#34;,&#34;)]
+                if len(coordinate) &gt; 3:
+                    raise ValueError(&#34;only accept 2D coordinate&#34;)
+
+                volume = input_volume
+                if input_volume == -1 and len(coordinate) &lt; 3:
+                    raise ValueError(&#34;Please define volume in GUI or coordinate file&#34;)
+                if input_volume == -1 and len(coordinate) == 3:
+                    volume = coordinate[2]
+
+                coordinates.append(StartPoint(coordinate[:3], volume))
+
+    return coordinates
+
+
+def create_lahar_inundation(
+    start_point: StartPoint,
+    dem: DEMData,
+    direction_array: np.ndarray,
+    confidence_limit: Union[int, float],
+) -&gt; Tuple[PlanimetricData, List[float]]:
+    cross_section_areas, planimetric_areas = calc_cross_planimetric(
+        [start_point.volume], confidence_limit
+    )
+
+    check_planimetric_extent = planimetric_areas.copy()
+    row = start_point.row
+    col = start_point.col
+
+    planimetrics = PlanimetricData(
+        value=[0 for _ in range(len(check_planimetric_extent))],
+        array=np.ones(direction_array.shape, dtype=int),
+        cross_area=cross_section_areas,
+    )
+
+    cell_traverse_count = 0
+    current_flow_direction = direction_array[row, col]
+    all_stop = False
+
+    try:
+        while (
+            not all_stop
+            and cell_traverse_count &lt; 90000000
+            and current_flow_direction != 0
+        ):
+            planimetrics = calc_cross_section(
+                dem,
+                current_flow_direction,
+                (row, col),
+                planimetrics,
+            )
+            first_direction, second_direction = cardinal_first.get(
+                current_flow_direction, (None, current_flow_direction)
+            )
+            original_direction = current_flow_direction
+            if first_direction is not None:
+                planimetrics = calc_cross_section(
+                    dem,
+                    first_direction,
+                    (row, col),
+                    planimetrics,
+                )
+                planimetrics = calc_cross_section(
+                    dem,
+                    second_direction,
+                    (row, col),
+                    planimetrics,
+                )
+            first_direction, second_direction = cardinal_second.get(
+                second_direction, (None, 0)
+            )
+            if first_direction is not None:
+                planimetrics = calc_cross_section(
+                    dem,
+                    first_direction,
+                    (row, col),
+                    planimetrics,
+                )
+                planimetrics = calc_cross_section(
+                    dem,
+                    second_direction,
+                    (row, col),
+                    planimetrics,
+                )
+            current_flow_direction = original_direction
+            if current_flow_direction in [2, 8, 32, 128]:
+                _row, _col = checker_board[current_flow_direction](row, col)
+                planimetrics = calc_cross_section(
+                    dem,
+                    current_flow_direction,
+                    (_row, _col),
+                    planimetrics,
+                )
+            planimetrics.value.reverse()
+            sigma_value = 0.0
+            temp_plan: List[float] = []
+            for value in planimetrics.value:
+                sigma_value += value
+                temp_plan.append(sigma_value * dem.cell_width * dem.cell_width)
+            temp_plan.reverse()
+            check_planimetric_extent = [
+                planimetric_areas[i] - temp_plan[i]
+                for i, _ in enumerate(check_planimetric_extent)
+            ]
+
+            planimetrics.value.reverse()
+
+            if len(check_planimetric_extent) &gt; 1:
+                for _, p in enumerate(check_planimetric_extent):
+                    if p &lt; 0:
+                        planimetrics.pop_cross()
+                        planimetric_areas.pop()
+                        cross_section_areas.pop()
+                        check_planimetric_extent.pop()
+            if check_planimetric_extent[0] &lt; 0:
+                break
+            row, col = move_downstream[current_flow_direction](row, col)
+            current_flow_direction = direction_array[row, col]
+            cell_traverse_count += 1
+            check_end = direction_array[row - 5 : row + 5, col - 5 : col + 5] == 255
+
+            if sum(check_end.ravel()) &gt; 5:
+                print(
+                    f&#34;volume too big: {start_point.volume}, there are leftover: {check_planimetric_extent}&#34;
+                )
+                raise CrossSectionTooLong
+            if current_flow_direction == 255:
+                print(f&#34;finished at blank, row:{row}, col:{col}&#34;)
+                raise CrossSectionTooLong
+
+        return planimetrics, check_planimetric_extent
+    except CrossSectionTooLong:
+        return planimetrics, check_planimetric_extent
+
+
+def save_result(
+    inundation: np.ndarray,
+    volume: int,
+    output_folder: Path,
+    index: int,
+    schema: RasterioMeta,
+    format: str,
+) -&gt; None:
+    if format == &#34;raster&#34;:
+        with rasterio.open(
+            output_folder / f&#34;stream_{index}_{volume}.tif&#34;, &#34;w&#34;, **schema
+        ) as output:
+            output.write(inundation, 1)
+    elif format == &#34;multi_vector&#34;:
+        union_features = polygonize(
+            inundation,
+            schema[&#34;transform&#34;],
+            inundation != 1,
+            lambda x: x[&#34;properties&#34;][&#34;raster_val&#34;],
+        )
+        with fiona.open(
+            output_folder / f&#34;stream_{index}_{volume}.shp&#34;,
+            &#34;w&#34;,
+            driver=&#34;ESRI Shapefile&#34;,
+            crs=schema[&#34;crs&#34;],
+            schema={
+                &#34;geometry&#34;: &#34;Polygon&#34;,
+                &#34;properties&#34;: OrderedDict([(&#34;raster_val&#34;, &#34;int&#34;)]),
+            },
+        ) as out:
+            out.writerecords(union_features)
+
+
+def _batch_lahar_inundation(
+    input_raster: str,
+    start_points: List[StartPoint],
+    confidence_limit: float,
+    output_folder: str = &#34;&#34;,
+    output_type: str = &#34;multi_vector&#34;,
+    progress_callback: Optional[Callable[[int, int], None]] = None,
+) -&gt; None:
+    raster_path = Path(input_raster)
+    basename = raster_path.name
+
+    if raster_path.is_dir():
+        prefix_name = basename
+        if basename.endswith(&#34;fill&#34;):
+            prefix_name = basename.rstrip(&#34;fill&#34;)
+        else:
+            raise ValueError(
+                f&#34;{basename} is not a name for filled dem. Please follow the convention&#34;
+            )
+
+        input_dem = raster_path.absolute()
+        input_direction = raster_path.parent.joinpath(f&#34;{prefix_name}dir&#34;)
+    else:
+        prefix_name = raster_path.stem
+        if prefix_name.endswith(&#34;fill&#34;):
+            prefix_name = prefix_name.rstrip(&#34;fill&#34;)
+        else:
+            raise ValueError(
+                f&#34;{basename} is not a name for filled dem. Please follow the convention&#34;
+            )
+
+        input_dem = raster_path.parent.joinpath(
+            f&#34;{prefix_name}fill{raster_path.suffix}&#34;
+        )
+        input_direction = raster_path.parent.joinpath(
+            f&#34;{prefix_name}dir{raster_path.suffix}&#34;
+        )
+
+    with rasterio.open(input_dem) as fill_file, rasterio.open(
+        input_direction
+    ) as direction_file:
+
+        dem_array = fill_file.read(1)
+        direction_array = direction_file.read(1)
+
+        schema = RasterioMeta(
+            **{
+                &#34;driver&#34;: &#34;GTiff&#34;,
+                &#34;count&#34;: 1,
+                &#34;crs&#34;: direction_file.crs,
+                &#34;dtype&#34;: np.int32,
+                &#34;transform&#34;: direction_file.transform,
+                &#34;height&#34;: direction_array.shape[0],
+                &#34;width&#34;: direction_array.shape[1],
+            }
+        )
+
+        cell_width, cell_diagonal = calc_cell_dimension(fill_file)
+
+        low_left_x = fill_file.bounds.left
+        up_right_y = fill_file.bounds.top
+
+        dem = DEMData(
+            array=dem_array,
+            cell_diagonal=cell_diagonal,
+            cell_width=cell_width,
+        )
+
+    output_stream: Path = Path(output_folder)
+    if not output_folder.strip():
+        output_stream = raster_path.parent / &#34;stream&#34;
+        if not output_stream.exists():
+            output_stream.mkdir(exist_ok=False)
+
+    progress_total = len(start_points)
+    for i, start_point in tqdm(enumerate(start_points)):
+        if start_point.volume &gt; 32:
+            start_point.to_rowcol(up_right_y, low_left_x, cell_width)
+
+            planimetrics, check_planimetric_extent = create_lahar_inundation(
+                start_point,
+                dem,
+                direction_array,
+                confidence_limit,
+            )
+
+            while check_planimetric_extent[0] &gt; 0 or planimetrics.last_count &gt; 5000:
+                # print(f&#34;Volume {start_point.volume} is too big. Reduce by 20&#34;)
+                if check_planimetric_extent[0] &gt; 10000:
+                    start_point.volume -= int(check_planimetric_extent[0] / 10000 * 50)
+                else:
+                    start_point.volume -= 20
+
+                if start_point.volume &lt; 32:
+                    start_point.volume = 32
+                    break
+
+                planimetrics, check_planimetric_extent = create_lahar_inundation(
+                    start_point,
+                    dem,
+                    direction_array,
+                    confidence_limit,
+                )
+
+            save_result(
+                planimetrics.array,
+                start_point.volume,
+                output_stream,
+                i,
+                schema,
+                output_type,
+            )
+
+            # with rasterio.open(
+            #     output_stream / f&#34;stream_{i}_{start_point.volume}.tif&#34;, &#34;w&#34;, **schema
+            # ) as output:
+            #     output.write(planimetrics.array, 1)
+        else:
+            print(f&#34;skipping point {i}. volume is below minimum&#34;)
+
+        if progress_callback is not None:
+            progress_callback(progress_total, i + 1)
+
+    print(f&#34;Done! {len(start_points)} points&#34;)
+    print(f&#34;Saved at {output_stream}&#34;)
+
+
+def batch_lahar_inundation(
+    input_raster: str,
+    input_coordinates: str,
+    confidence_limit: float,
+    input_volume: Union[None, float, int] = None,
+    output_folder: str = &#34;&#34;,
+    output_type: str = &#34;multi_vector&#34;,
+    progress_callback: Optional[Callable[[int, int], None]] = None,
+) -&gt; None:
+    _input_volume: int = -1
+    if input_volume is not None:
+        _input_volume = int(input_volume)
+    start_points = read_coordinates(input_coordinates, _input_volume)
+    _batch_lahar_inundation(
+        input_raster,
+        start_points,
+        confidence_limit,
+        output_folder,
+        output_type,
+        progress_callback,
+    )</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="pearpy.distal_inundation.append_point2array"><code class="name flex">
+<span>def <span class="ident">append_point2array</span></span>(<span>row: int, col: int, planimetrics: <a title="pearpy.distal_inundation.PlanimetricData" href="#pearpy.distal_inundation.PlanimetricData">PlanimetricData</a>) ‑> <a title="pearpy.distal_inundation.PlanimetricData" href="#pearpy.distal_inundation.PlanimetricData">PlanimetricData</a></span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>row</code></strong> :&ensp;<code>int</code></dt>
+<dd>[description]</dd>
+<dt><strong><code>col</code></strong> :&ensp;<code>int</code></dt>
+<dd>[description]</dd>
+<dt><strong><code>planimetrics</code></strong> :&ensp;<code><a title="pearpy.distal_inundation.PlanimetricData" href="#pearpy.distal_inundation.PlanimetricData">PlanimetricData</a></code></dt>
+<dd>[description]</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="pearpy.distal_inundation.PlanimetricData" href="#pearpy.distal_inundation.PlanimetricData">PlanimetricData</a></code></dt>
+<dd>[description]</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def append_point2array(
+    row: int, col: int, planimetrics: PlanimetricData
+) -&gt; PlanimetricData:
+    &#34;&#34;&#34;
+
+    Parameters
+    ----------
+    row : int
+        [description]
+    col : int
+        [description]
+    planimetrics : PlanimetricData
+        [description]
+
+    Returns
+    -------
+    PlanimetricData
+        [description]
+    &#34;&#34;&#34;
+    cross_area_count = len(planimetrics.cross_area) + 1
+    dem_value = planimetrics.array[row, col]
+
+    if dem_value == 1:
+        planimetrics.array[row, col] = cross_area_count
+        planimetrics.value[cross_area_count - 2] += 1
+    elif dem_value &lt; cross_area_count:
+        planimetrics.array[row, col] = cross_area_count
+        planimetrics.value[dem_value - 2] -= 1
+        planimetrics.value[cross_area_count - 2] += 1
+
+    return planimetrics</code></pre>
+</details>
+</dd>
+<dt id="pearpy.distal_inundation.batch_lahar_inundation"><code class="name flex">
+<span>def <span class="ident">batch_lahar_inundation</span></span>(<span>input_raster: str, input_coordinates: str, confidence_limit: float, input_volume: typing.Union[NoneType, float, int] = None, output_folder: str = '', output_type: str = 'multi_vector', progress_callback: typing.Optional[typing.Callable[[int, int], NoneType]] = None) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def batch_lahar_inundation(
+    input_raster: str,
+    input_coordinates: str,
+    confidence_limit: float,
+    input_volume: Union[None, float, int] = None,
+    output_folder: str = &#34;&#34;,
+    output_type: str = &#34;multi_vector&#34;,
+    progress_callback: Optional[Callable[[int, int], None]] = None,
+) -&gt; None:
+    _input_volume: int = -1
+    if input_volume is not None:
+        _input_volume = int(input_volume)
+    start_points = read_coordinates(input_coordinates, _input_volume)
+    _batch_lahar_inundation(
+        input_raster,
+        start_points,
+        confidence_limit,
+        output_folder,
+        output_type,
+        progress_callback,
+    )</code></pre>
+</details>
+</dd>
+<dt id="pearpy.distal_inundation.calc_area"><code class="name flex">
+<span>def <span class="ident">calc_area</span></span>(<span>volume_list: typing.Union[typing.List[int], typing.List[float]], coefficient: float) ‑> typing.List[float]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>calculatte the planimetric area based on volume</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>volume_list</code></strong> :&ensp;<code>Union[List[int], List[float]]</code></dt>
+<dd>volumes</dd>
+<dt><strong><code>coefficient</code></strong> :&ensp;<code>float</code></dt>
+<dd>area coefficient</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>List[float]</code></dt>
+<dd>List of volume</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calc_area(
+    volume_list: Union[List[int], List[float]], coefficient: float
+) -&gt; List[float]:
+    &#34;&#34;&#34;calculatte the planimetric area based on volume
+
+    Parameters
+    ----------
+    volume_list : Union[List[int], List[float]]
+        volumes
+    coefficient : float
+        area coefficient
+
+    Returns
+    -------
+    List[float]
+        List of volume
+    &#34;&#34;&#34;
+    return [round(volume ** 0.666666666666666 * coefficient) for volume in volume_list]</code></pre>
+</details>
+</dd>
+<dt id="pearpy.distal_inundation.calc_cell_dimension"><code class="name flex">
+<span>def <span class="ident">calc_cell_dimension</span></span>(<span>dem: rasterio.io.DatasetReader) ‑> typing.Tuple[float, float]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>calculate cell diagonal and width</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>dem</code></strong> :&ensp;<code>rasterio.DatasetReader</code></dt>
+<dd>DEM file read by rasterio</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Tuple[float, float]</code></dt>
+<dd>width and diagonal</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calc_cell_dimension(dem: rasterio.DatasetReader) -&gt; Tuple[float, float]:
+    &#34;&#34;&#34;calculate cell diagonal and width
+
+    Parameters
+    ----------
+    dem : rasterio.DatasetReader
+        DEM file read by rasterio
+
+    Returns
+    -------
+    Tuple[float, float]
+        width and diagonal
+    &#34;&#34;&#34;
+    width = dem.transform[0]
+    diagonal = round(sqrt((width ** 2) * 2) * 100) / 100
+    return width, diagonal</code></pre>
+</details>
+</dd>
+<dt id="pearpy.distal_inundation.calc_confidence_limit"><code class="name flex">
+<span>def <span class="ident">calc_confidence_limit</span></span>(<span>is_cross_section: bool, user_volume: typing.Union[int, float], confidence_limit: float) ‑> typing.Tuple[float, float]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculate area based on defined confidence limit</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>is_cross_section</code></strong> :&ensp;<code>bool</code></dt>
+<dd>cross or long section</dd>
+<dt><strong><code>user_volume</code></strong> :&ensp;<code>Union[int, float]</code></dt>
+<dd>user volume</dd>
+<dt><strong><code>confidence_limit</code></strong> :&ensp;<code>float</code></dt>
+<dd>confidence limit</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Tuple[float, float]</code></dt>
+<dd>volumes</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calc_confidence_limit(
+    is_cross_section: bool,
+    user_volume: Union[int, float],
+    confidence_limit: float,
+) -&gt; Tuple[float, float]:
+    &#34;&#34;&#34;Calculate area based on defined confidence limit
+
+    Parameters
+    ----------
+    is_cross_section : bool
+        cross or long section
+    user_volume : Union[int, float]
+        user volume
+    confidence_limit : float
+        confidence limit
+
+    Returns
+    -------
+    Tuple[float, float]
+        volumes
+    &#34;&#34;&#34;
+
+    an_intercept = 2.301
+    dec_intercept = 200.0
+    fills = py_xxplanb
+    if is_cross_section:
+        an_intercept = -1.301
+        dec_intercept = 0.05
+        fills = py_xxsecta
+
+    residual_sum = 0.0
+    total_log_volume = 0.0
+
+    for (_, volume, area) in fills:
+        log_vol = log10(volume)
+        total_log_volume += log_vol
+
+        log_area_y = log10(area)
+        log_area_pred = (log_vol * 0.666666666667) + an_intercept
+        diff = (log_area_y - log_area_pred) * (log_area_y - log_area_pred)
+        residual_sum += diff
+
+    se_model = sqrt(residual_sum / (len(fills) - 1))
+    mean_log_volume = total_log_volume / len(fills)
+
+    mean_diff_total = 0.0
+    one_over_n = 1.0 / len(fills)
+
+    for (_, volume, area) in fills:
+        log_vol = log10(volume)
+        diff_log_mean = log_vol - mean_log_volume
+        diff_squared = diff_log_mean ** 2
+
+        mean_diff_total += diff_squared
+
+    crossttabll = py_xxttabl[len(fills) - 2]
+    cross_section_data = crossttabll[confidence2index[str(confidence_limit)]]
+
+    area_up: float = 0.0
+    area_dn: float = 0.0
+    if cross_section_data is not None:
+        log_user_volume = log10(user_volume)
+        user_regress_area = round((user_volume ** 0.66666666666667) * dec_intercept)
+
+        diff_mean = log_user_volume - mean_log_volume
+        diff_mean_sq = diff_mean ** 2
+
+        sem = se_model * sqrt(one_over_n + (diff_mean_sq / mean_diff_total))
+        sep = sqrt((se_model ** 2) + (sem ** 2))
+
+        area_up = 10 ** ((cross_section_data * sep) + log10(user_regress_area))
+        area_dn = 10 ** (log10(user_regress_area) - (cross_section_data * sep))
+
+    return area_up, area_dn</code></pre>
+</details>
+</dd>
+<dt id="pearpy.distal_inundation.calc_cross_planimetric"><code class="name flex">
+<span>def <span class="ident">calc_cross_planimetric</span></span>(<span>volumes: typing.List[int], confidence_limit: float) ‑> typing.Tuple[typing.List[float], typing.List[float]]</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calc_cross_planimetric(
+    volumes: List[int], confidence_limit: float
+) -&gt; Tuple[List[float], List[float]]:
+    cross_section_areas = calc_area(volumes, 0.05)
+    planimetric_areas = calc_area(volumes, 200)
+
+    cross_section_area1, cross_section_area3 = calc_confidence_limit(
+        True, volumes[0], confidence_limit
+    )
+
+    planimetric_area1, planimetric_area3 = calc_confidence_limit(
+        False, volumes[0], confidence_limit
+    )
+
+    cross_section_areas += [round(cross_section_area1), round(cross_section_area3)]
+    planimetric_areas += [round(planimetric_area1), round(planimetric_area3)]
+
+    return sorted(cross_section_areas, reverse=True), sorted(
+        planimetric_areas, reverse=True
+    )</code></pre>
+</details>
+</dd>
+<dt id="pearpy.distal_inundation.calc_cross_section"><code class="name flex">
+<span>def <span class="ident">calc_cross_section</span></span>(<span>dem: <a title="pearpy.distal_inundation.DEMData" href="#pearpy.distal_inundation.DEMData">DEMData</a>, flow_direction: int, row_col: typing.Tuple[int, int], planimetrics: <a title="pearpy.distal_inundation.PlanimetricData" href="#pearpy.distal_inundation.PlanimetricData">PlanimetricData</a>) ‑> <a title="pearpy.distal_inundation.PlanimetricData" href="#pearpy.distal_inundation.PlanimetricData">PlanimetricData</a></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calc_cross_section(
+    dem: DEMData,
+    flow_direction: int,
+    row_col: Tuple[int, int],
+    planimetrics: PlanimetricData,
+) -&gt; PlanimetricData:
+    cell_dimension = dem.cell_width
+    if flow_direction in [8, 128, 2, 32]:
+        cell_dimension = dem.cell_diagonal
+
+    right_x, right_y = row_col
+
+    if flow_direction not in [1, 2, 4, 8, 16, 32, 64, 128]:
+        raise ValueError(f&#34;out of bound, direction: {flow_direction}&#34;)
+    left_x, left_y = left_cell[flow_direction](right_x, right_y)
+
+    try:
+        left_elevation = dem.array[left_x, left_y]
+        right_elevation = dem.array[right_x, right_y]
+    except IndexError:
+        return planimetrics
+
+    fill_elevation = right_elevation
+    count = 0
+    cell_norm = 1
+    cell_wneg = -1
+    cell_count = 0
+
+    while (
+        count &lt; 1000000000
+        and planimetrics.cross_area
+        and planimetrics.cross_area[0] &gt; 0
+    ):
+        if left_elevation == fill_elevation:
+            planimetrics = append_point2array(left_x, left_y, planimetrics)
+            left_x, left_y, left_elevation = get_next_cell(
+                left_x, left_y, cell_norm, flow_direction, dem.array
+            )
+            cell_count += 1
+        elif right_elevation == fill_elevation:
+            planimetrics = append_point2array(right_x, right_y, planimetrics)
+            right_x, right_y, right_elevation = get_next_cell(
+                right_x, right_y, cell_wneg, flow_direction, dem.array
+            )
+            cell_count += 1
+
+        elif right_elevation &lt; fill_elevation:
+            planimetrics.cross_area = create_cross_area(
+                fill_elevation, right_elevation, cell_dimension, planimetrics.cross_area
+            )
+            cell_count += 1
+            if planimetrics.cross_area and planimetrics.cross_area[0] &gt; 0:
+                planimetrics = append_point2array(right_x, right_y, planimetrics)
+                right_x, right_y, right_elevation = get_next_cell(
+                    right_x, right_y, cell_wneg, flow_direction, dem.array
+                )
+
+        elif left_elevation &lt; fill_elevation:
+            planimetrics.cross_area = create_cross_area(
+                fill_elevation, left_elevation, cell_dimension, planimetrics.cross_area
+            )
+            cell_count += 1
+            if planimetrics.cross_area and planimetrics.cross_area[0] &gt; 0:
+                planimetrics = append_point2array(left_x, left_y, planimetrics)
+                left_x, left_y, left_elevation = get_next_cell(
+                    left_x, left_y, cell_norm, flow_direction, dem.array
+                )
+
+        elif right_elevation == left_elevation:
+            planimetrics.cross_area = create_cross_area(
+                right_elevation,
+                fill_elevation,
+                cell_dimension,
+                planimetrics.cross_area,
+                cell_count,
+            )
+
+            if planimetrics.cross_area and planimetrics.cross_area[0] &gt; 0:
+                fill_elevation = right_elevation
+                planimetrics = append_point2array(left_x, left_y, planimetrics)
+                left_x, left_y, left_elevation = get_next_cell(
+                    left_x, left_y, cell_norm, flow_direction, dem.array
+                )
+
+                planimetrics = append_point2array(right_x, right_y, planimetrics)
+                right_x, right_y, right_elevation = get_next_cell(
+                    right_x, right_y, cell_wneg, flow_direction, dem.array
+                )
+                cell_count += 2
+
+        elif right_elevation &gt; left_elevation:
+            planimetrics.cross_area = create_cross_area(
+                left_elevation,
+                fill_elevation,
+                cell_dimension,
+                planimetrics.cross_area,
+                cell_count,
+            )
+            cell_count += 1
+            if planimetrics.cross_area and planimetrics.cross_area[0] &gt; 0:
+                fill_elevation = left_elevation
+                planimetrics = append_point2array(left_x, left_y, planimetrics)
+                left_x, left_y, left_elevation = get_next_cell(
+                    left_x, left_y, cell_norm, flow_direction, dem.array
+                )
+
+        elif right_elevation &lt; left_elevation:
+            planimetrics.cross_area = create_cross_area(
+                right_elevation,
+                fill_elevation,
+                cell_dimension,
+                planimetrics.cross_area,
+                cell_count,
+            )
+            cell_count += 1
+            if planimetrics.cross_area and planimetrics.cross_area[0] &gt; 0:
+                fill_elevation = right_elevation
+                planimetrics = append_point2array(right_x, right_y, planimetrics)
+                right_x, right_y, left_elevation = get_next_cell(
+                    right_x, right_y, cell_wneg, flow_direction, dem.array
+                )
+
+        if left_elevation == 99999.0 or right_elevation == 99999.0:
+            planimetrics.cross_area = [-99999 for _ in planimetrics.cross_area]
+
+        count += 1
+    planimetrics.restore()
+    return planimetrics</code></pre>
+</details>
+</dd>
+<dt id="pearpy.distal_inundation.create_cross_area"><code class="name flex">
+<span>def <span class="ident">create_cross_area</span></span>(<span>first_elevation: float, second_elevation: float, cell_dimension: float, cross_areas: typing.List[float], cell_count: int = 1) ‑> typing.List[float]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>calculate the cross area of lahar inundation</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>first_elevation</code></strong> :&ensp;<code>float</code></dt>
+<dd>first elevation</dd>
+<dt><strong><code>second_elevation</code></strong> :&ensp;<code>float</code></dt>
+<dd>second elevation</dd>
+<dt><strong><code>cell_dimension</code></strong> :&ensp;<code>float</code></dt>
+<dd>width</dd>
+<dt><strong><code>cross_areas</code></strong> :&ensp;<code>List[float]</code></dt>
+<dd>list of cross areas</dd>
+<dt><strong><code>cell_count</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>[description], by default 1</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>List[float]</code></dt>
+<dd>[description]</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_cross_area(
+    first_elevation: float,
+    second_elevation: float,
+    cell_dimension: float,
+    cross_areas: List[float],
+    cell_count: int = 1,
+) -&gt; List[float]:
+    &#34;&#34;&#34;calculate the cross area of lahar inundation
+
+    Parameters
+    ----------
+    first_elevation : float
+        first elevation
+    second_elevation : float
+        second elevation
+    cell_dimension : float
+        width
+    cross_areas : List[float]
+        list of cross areas
+    cell_count : int, optional
+        [description], by default 1
+
+    Returns
+    -------
+    List[float]
+        [description]
+    &#34;&#34;&#34;
+    cross_areas = [
+        area - ((first_elevation - second_elevation) * (cell_dimension * cell_count))
+        for area in cross_areas
+    ]
+    if len(cross_areas) &gt; 1:
+        # Remove negative value
+        cross_areas = list(filter(lambda x: x &gt; 0, cross_areas))
+    return cross_areas</code></pre>
+</details>
+</dd>
+<dt id="pearpy.distal_inundation.create_lahar_inundation"><code class="name flex">
+<span>def <span class="ident">create_lahar_inundation</span></span>(<span>start_point: <a title="pearpy.distal_inundation.StartPoint" href="#pearpy.distal_inundation.StartPoint">StartPoint</a>, dem: <a title="pearpy.distal_inundation.DEMData" href="#pearpy.distal_inundation.DEMData">DEMData</a>, direction_array: numpy.ndarray, confidence_limit: typing.Union[int, float]) ‑> typing.Tuple[<a title="pearpy.distal_inundation.PlanimetricData" href="#pearpy.distal_inundation.PlanimetricData">PlanimetricData</a>, typing.List[float]]</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_lahar_inundation(
+    start_point: StartPoint,
+    dem: DEMData,
+    direction_array: np.ndarray,
+    confidence_limit: Union[int, float],
+) -&gt; Tuple[PlanimetricData, List[float]]:
+    cross_section_areas, planimetric_areas = calc_cross_planimetric(
+        [start_point.volume], confidence_limit
+    )
+
+    check_planimetric_extent = planimetric_areas.copy()
+    row = start_point.row
+    col = start_point.col
+
+    planimetrics = PlanimetricData(
+        value=[0 for _ in range(len(check_planimetric_extent))],
+        array=np.ones(direction_array.shape, dtype=int),
+        cross_area=cross_section_areas,
+    )
+
+    cell_traverse_count = 0
+    current_flow_direction = direction_array[row, col]
+    all_stop = False
+
+    try:
+        while (
+            not all_stop
+            and cell_traverse_count &lt; 90000000
+            and current_flow_direction != 0
+        ):
+            planimetrics = calc_cross_section(
+                dem,
+                current_flow_direction,
+                (row, col),
+                planimetrics,
+            )
+            first_direction, second_direction = cardinal_first.get(
+                current_flow_direction, (None, current_flow_direction)
+            )
+            original_direction = current_flow_direction
+            if first_direction is not None:
+                planimetrics = calc_cross_section(
+                    dem,
+                    first_direction,
+                    (row, col),
+                    planimetrics,
+                )
+                planimetrics = calc_cross_section(
+                    dem,
+                    second_direction,
+                    (row, col),
+                    planimetrics,
+                )
+            first_direction, second_direction = cardinal_second.get(
+                second_direction, (None, 0)
+            )
+            if first_direction is not None:
+                planimetrics = calc_cross_section(
+                    dem,
+                    first_direction,
+                    (row, col),
+                    planimetrics,
+                )
+                planimetrics = calc_cross_section(
+                    dem,
+                    second_direction,
+                    (row, col),
+                    planimetrics,
+                )
+            current_flow_direction = original_direction
+            if current_flow_direction in [2, 8, 32, 128]:
+                _row, _col = checker_board[current_flow_direction](row, col)
+                planimetrics = calc_cross_section(
+                    dem,
+                    current_flow_direction,
+                    (_row, _col),
+                    planimetrics,
+                )
+            planimetrics.value.reverse()
+            sigma_value = 0.0
+            temp_plan: List[float] = []
+            for value in planimetrics.value:
+                sigma_value += value
+                temp_plan.append(sigma_value * dem.cell_width * dem.cell_width)
+            temp_plan.reverse()
+            check_planimetric_extent = [
+                planimetric_areas[i] - temp_plan[i]
+                for i, _ in enumerate(check_planimetric_extent)
+            ]
+
+            planimetrics.value.reverse()
+
+            if len(check_planimetric_extent) &gt; 1:
+                for _, p in enumerate(check_planimetric_extent):
+                    if p &lt; 0:
+                        planimetrics.pop_cross()
+                        planimetric_areas.pop()
+                        cross_section_areas.pop()
+                        check_planimetric_extent.pop()
+            if check_planimetric_extent[0] &lt; 0:
+                break
+            row, col = move_downstream[current_flow_direction](row, col)
+            current_flow_direction = direction_array[row, col]
+            cell_traverse_count += 1
+            check_end = direction_array[row - 5 : row + 5, col - 5 : col + 5] == 255
+
+            if sum(check_end.ravel()) &gt; 5:
+                print(
+                    f&#34;volume too big: {start_point.volume}, there are leftover: {check_planimetric_extent}&#34;
+                )
+                raise CrossSectionTooLong
+            if current_flow_direction == 255:
+                print(f&#34;finished at blank, row:{row}, col:{col}&#34;)
+                raise CrossSectionTooLong
+
+        return planimetrics, check_planimetric_extent
+    except CrossSectionTooLong:
+        return planimetrics, check_planimetric_extent</code></pre>
+</details>
+</dd>
+<dt id="pearpy.distal_inundation.get_next_cell"><code class="name flex">
+<span>def <span class="ident">get_next_cell</span></span>(<span>row: int, col: int, cell_side: int, flow_direction: int, dem_array: numpy.ndarray, no_data: float = 99999.0) ‑> typing.Tuple[int, int, typing.Union[int, float]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>get next cell whether left or downward</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>row</code></strong> :&ensp;<code>int</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>col</code></strong> :&ensp;<code>int</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>cell_side</code></strong> :&ensp;<code>int</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>flow_direction</code></strong> :&ensp;<code>int</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>dem_array</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>&nbsp;</dd>
+<dt><strong><code>no_data</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>no data, by default 99999.0</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Tuple[int, int, Union[int, float]]</code></dt>
+<dd>row, col, elevation</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>Flow doesn't follow d8 flow style</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_next_cell(
+    row: int,
+    col: int,
+    cell_side: int,
+    flow_direction: int,
+    dem_array: np.ndarray,
+    no_data: float = 99999.0,
+) -&gt; Tuple[int, int, Union[int, float]]:
+    &#34;&#34;&#34;get next cell whether left or downward
+
+    Parameters
+    ----------
+    row : int
+    col : int
+    cell_side : int
+    flow_direction : int
+    dem_array : np.ndarray
+    no_data : float, optional
+        no data, by default 99999.0
+
+    Returns
+    -------
+    Tuple[int, int, Union[int, float]]
+        row, col, elevation
+
+    Raises
+    ------
+    ValueError
+        Flow doesn&#39;t follow d8 flow style
+    &#34;&#34;&#34;
+    if flow_direction in [1, 2, 4, 8, 16, 32, 64, 128]:
+        row_operator, col_operator = next_cell[flow_direction]
+    else:
+        raise ValueError(f&#34;Bad flow direction {flow_direction}&#34;)
+
+    original_x, original_y = row, col
+    row += cell_side * row_operator
+    col += cell_side * col_operator
+
+    try:
+        elevation = dem_array[row, col]
+    except IndexError:
+        row, col = original_x, original_y
+        elevation = no_data
+
+    return row, col, elevation</code></pre>
+</details>
+</dd>
+<dt id="pearpy.distal_inundation.read_coordinates"><code class="name flex">
+<span>def <span class="ident">read_coordinates</span></span>(<span>file_location: str, input_volume: int = -1) ‑> typing.List[<a title="pearpy.distal_inundation.StartPoint" href="#pearpy.distal_inundation.StartPoint">StartPoint</a>]</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_coordinates(file_location: str, input_volume: int = -1) -&gt; List[StartPoint]:
+    coordinates: List[StartPoint] = []
+    with open(file_location) as file:
+        for line in file.readlines():
+            if &#34;,&#34; in line:
+                coordinate = [round(float(c)) for c in line.split(&#34;,&#34;)]
+                if len(coordinate) &gt; 3:
+                    raise ValueError(&#34;only accept 2D coordinate&#34;)
+
+                volume = input_volume
+                if input_volume == -1 and len(coordinate) &lt; 3:
+                    raise ValueError(&#34;Please define volume in GUI or coordinate file&#34;)
+                if input_volume == -1 and len(coordinate) == 3:
+                    volume = coordinate[2]
+
+                coordinates.append(StartPoint(coordinate[:3], volume))
+
+    return coordinates</code></pre>
+</details>
+</dd>
+<dt id="pearpy.distal_inundation.read_volumes"><code class="name flex">
+<span>def <span class="ident">read_volumes</span></span>(<span>volume_file: typing.Union[pathlib.Path, str]) ‑> typing.List[int]</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_volumes(volume_file: Union[Path, str]) -&gt; List[int]:
+    with open(volume_file) as volume_reader:
+        volumes = [round(float(line)) for line in volume_reader]
+    return volumes</code></pre>
+</details>
+</dd>
+<dt id="pearpy.distal_inundation.save_result"><code class="name flex">
+<span>def <span class="ident">save_result</span></span>(<span>inundation: numpy.ndarray, volume: int, output_folder: pathlib.Path, index: int, schema: <a title="pearpy.custom_types.RasterioMeta" href="custom_types.html#pearpy.custom_types.RasterioMeta">RasterioMeta</a>, format: str) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_result(
+    inundation: np.ndarray,
+    volume: int,
+    output_folder: Path,
+    index: int,
+    schema: RasterioMeta,
+    format: str,
+) -&gt; None:
+    if format == &#34;raster&#34;:
+        with rasterio.open(
+            output_folder / f&#34;stream_{index}_{volume}.tif&#34;, &#34;w&#34;, **schema
+        ) as output:
+            output.write(inundation, 1)
+    elif format == &#34;multi_vector&#34;:
+        union_features = polygonize(
+            inundation,
+            schema[&#34;transform&#34;],
+            inundation != 1,
+            lambda x: x[&#34;properties&#34;][&#34;raster_val&#34;],
+        )
+        with fiona.open(
+            output_folder / f&#34;stream_{index}_{volume}.shp&#34;,
+            &#34;w&#34;,
+            driver=&#34;ESRI Shapefile&#34;,
+            crs=schema[&#34;crs&#34;],
+            schema={
+                &#34;geometry&#34;: &#34;Polygon&#34;,
+                &#34;properties&#34;: OrderedDict([(&#34;raster_val&#34;, &#34;int&#34;)]),
+            },
+        ) as out:
+            out.writerecords(union_features)</code></pre>
+</details>
+</dd>
+<dt id="pearpy.distal_inundation.text2list"><code class="name flex">
+<span>def <span class="ident">text2list</span></span>(<span>file_name: str) ‑> typing.List[typing.List[float]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Parse coordinate and volume into list</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>file_name</code></strong> :&ensp;<code>str</code></dt>
+<dd>coordinate and volume file</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>List[List[float]]</code></dt>
+<dd>[[coordinate_x, coordinate_y, volume]]</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def text2list(file_name: str) -&gt; List[List[float]]:
+    &#34;&#34;&#34;Parse coordinate and volume into list
+
+    Parameters
+    ----------
+    file_name : str
+        coordinate and volume file
+
+    Returns
+    -------
+    List[List[float]]
+        [[coordinate_x, coordinate_y, volume]]
+    &#34;&#34;&#34;
+    with open(file_name) as input_file:
+        dataset: List[List[float]] = [
+            [round(float(coordinate)) for coordinate in line.split(&#34;,&#34;)]
+            for line in input_file
+            if &#34;,&#34; in line
+        ]
+
+    return sorted(dataset)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="pearpy.distal_inundation.CrossSectionTooLong"><code class="flex name class">
+<span>class <span class="ident">CrossSectionTooLong</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Exception called if volume is too big which caused the cross section too long.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>Exception</code></strong> :&ensp;<code>[type]</code></dt>
+<dd>[description]</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CrossSectionTooLong(Exception):
+    &#34;&#34;&#34;Exception called if volume is too big which caused the cross section too long.
+
+    Parameters
+    ----------
+    Exception : [type]
+        [description]
+    &#34;&#34;&#34;
+    pass</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="pearpy.distal_inundation.DEMData"><code class="flex name class">
+<span>class <span class="ident">DEMData</span></span>
+<span>(</span><span>array: numpy.ndarray, cell_diagonal: float, cell_width: float)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DEMData(array: numpy.ndarray, cell_diagonal: float, cell_width: float)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class DEMData:
+    array: np.ndarray
+    cell_diagonal: float
+    cell_width: float</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="pearpy.distal_inundation.DEMData.array"><code class="name">var <span class="ident">array</span> : numpy.ndarray</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pearpy.distal_inundation.DEMData.cell_diagonal"><code class="name">var <span class="ident">cell_diagonal</span> : float</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pearpy.distal_inundation.DEMData.cell_width"><code class="name">var <span class="ident">cell_width</span> : float</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="pearpy.distal_inundation.PlanimetricData"><code class="flex name class">
+<span>class <span class="ident">PlanimetricData</span></span>
+<span>(</span><span>value: typing.List[float], array: numpy.ndarray, cross_area: typing.List[float], cross_area_ori: typing.List[float] = &lt;factory&gt;, previous_count: int = 0, last_count: int = 0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Planimetric area information and function</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class PlanimetricData:
+    &#34;&#34;&#34;Planimetric area information and function
+    &#34;&#34;&#34;
+    value: List[float]
+    array: np.ndarray
+    cross_area: List[float]
+    cross_area_ori: List[float] = field(default_factory=list)
+    previous_count: int = 0
+    last_count: int = 0
+
+    def __post_init__(self) -&gt; None:
+        &#34;&#34;&#34;create a copy of original to reset the data after move downward
+        &#34;&#34;&#34;
+        self.cross_area_ori = self.cross_area.copy()
+
+    def restore(self) -&gt; None:
+        &#34;&#34;&#34;reset the data after move downward
+        &#34;&#34;&#34;
+        self.cross_area = self.cross_area_ori.copy()
+
+    def pop_cross(self) -&gt; None:
+        &#34;&#34;&#34;pop cross area&#34;&#34;&#34;
+        self.cross_area.pop()
+        self.cross_area_ori = self.cross_area</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="pearpy.distal_inundation.PlanimetricData.array"><code class="name">var <span class="ident">array</span> : numpy.ndarray</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pearpy.distal_inundation.PlanimetricData.cross_area"><code class="name">var <span class="ident">cross_area</span> : typing.List[float]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pearpy.distal_inundation.PlanimetricData.cross_area_ori"><code class="name">var <span class="ident">cross_area_ori</span> : typing.List[float]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pearpy.distal_inundation.PlanimetricData.last_count"><code class="name">var <span class="ident">last_count</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pearpy.distal_inundation.PlanimetricData.previous_count"><code class="name">var <span class="ident">previous_count</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pearpy.distal_inundation.PlanimetricData.value"><code class="name">var <span class="ident">value</span> : typing.List[float]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="pearpy.distal_inundation.PlanimetricData.pop_cross"><code class="name flex">
+<span>def <span class="ident">pop_cross</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>pop cross area</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def pop_cross(self) -&gt; None:
+    &#34;&#34;&#34;pop cross area&#34;&#34;&#34;
+    self.cross_area.pop()
+    self.cross_area_ori = self.cross_area</code></pre>
+</details>
+</dd>
+<dt id="pearpy.distal_inundation.PlanimetricData.restore"><code class="name flex">
+<span>def <span class="ident">restore</span></span>(<span>self) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>reset the data after move downward</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def restore(self) -&gt; None:
+    &#34;&#34;&#34;reset the data after move downward
+    &#34;&#34;&#34;
+    self.cross_area = self.cross_area_ori.copy()</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="pearpy.distal_inundation.StartPoint"><code class="flex name class">
+<span>class <span class="ident">StartPoint</span></span>
+<span>(</span><span>coordinate: typing.List[int], volume: int)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>StartPoint(coordinate: List[int], volume: int)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class StartPoint:
+    coordinate: List[int]
+    volume: int
+
+    @property
+    def x(self) -&gt; int:
+        return self.coordinate[0]
+
+    @property
+    def y(self) -&gt; int:
+        return self.coordinate[1]
+
+    def to_rowcol(
+        self, up_right_y: float, low_left_x: float, cell_width: float
+    ) -&gt; None:
+        row = int((up_right_y - self.y) / cell_width)
+        col = int((self.x - low_left_x) / cell_width)
+        self.row: int = row
+        self.col: int = col</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="pearpy.distal_inundation.StartPoint.coordinate"><code class="name">var <span class="ident">coordinate</span> : typing.List[int]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pearpy.distal_inundation.StartPoint.volume"><code class="name">var <span class="ident">volume</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pearpy.distal_inundation.StartPoint.x"><code class="name">var <span class="ident">x</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def x(self) -&gt; int:
+    return self.coordinate[0]</code></pre>
+</details>
+</dd>
+<dt id="pearpy.distal_inundation.StartPoint.y"><code class="name">var <span class="ident">y</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def y(self) -&gt; int:
+    return self.coordinate[1]</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="pearpy.distal_inundation.StartPoint.to_rowcol"><code class="name flex">
+<span>def <span class="ident">to_rowcol</span></span>(<span>self, up_right_y: float, low_left_x: float, cell_width: float) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def to_rowcol(
+    self, up_right_y: float, low_left_x: float, cell_width: float
+) -&gt; None:
+    row = int((up_right_y - self.y) / cell_width)
+    col = int((self.x - low_left_x) / cell_width)
+    self.row: int = row
+    self.col: int = col</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="pearpy" href="index.html">pearpy</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="pearpy.distal_inundation.append_point2array" href="#pearpy.distal_inundation.append_point2array">append_point2array</a></code></li>
+<li><code><a title="pearpy.distal_inundation.batch_lahar_inundation" href="#pearpy.distal_inundation.batch_lahar_inundation">batch_lahar_inundation</a></code></li>
+<li><code><a title="pearpy.distal_inundation.calc_area" href="#pearpy.distal_inundation.calc_area">calc_area</a></code></li>
+<li><code><a title="pearpy.distal_inundation.calc_cell_dimension" href="#pearpy.distal_inundation.calc_cell_dimension">calc_cell_dimension</a></code></li>
+<li><code><a title="pearpy.distal_inundation.calc_confidence_limit" href="#pearpy.distal_inundation.calc_confidence_limit">calc_confidence_limit</a></code></li>
+<li><code><a title="pearpy.distal_inundation.calc_cross_planimetric" href="#pearpy.distal_inundation.calc_cross_planimetric">calc_cross_planimetric</a></code></li>
+<li><code><a title="pearpy.distal_inundation.calc_cross_section" href="#pearpy.distal_inundation.calc_cross_section">calc_cross_section</a></code></li>
+<li><code><a title="pearpy.distal_inundation.create_cross_area" href="#pearpy.distal_inundation.create_cross_area">create_cross_area</a></code></li>
+<li><code><a title="pearpy.distal_inundation.create_lahar_inundation" href="#pearpy.distal_inundation.create_lahar_inundation">create_lahar_inundation</a></code></li>
+<li><code><a title="pearpy.distal_inundation.get_next_cell" href="#pearpy.distal_inundation.get_next_cell">get_next_cell</a></code></li>
+<li><code><a title="pearpy.distal_inundation.read_coordinates" href="#pearpy.distal_inundation.read_coordinates">read_coordinates</a></code></li>
+<li><code><a title="pearpy.distal_inundation.read_volumes" href="#pearpy.distal_inundation.read_volumes">read_volumes</a></code></li>
+<li><code><a title="pearpy.distal_inundation.save_result" href="#pearpy.distal_inundation.save_result">save_result</a></code></li>
+<li><code><a title="pearpy.distal_inundation.text2list" href="#pearpy.distal_inundation.text2list">text2list</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="pearpy.distal_inundation.CrossSectionTooLong" href="#pearpy.distal_inundation.CrossSectionTooLong">CrossSectionTooLong</a></code></h4>
+</li>
+<li>
+<h4><code><a title="pearpy.distal_inundation.DEMData" href="#pearpy.distal_inundation.DEMData">DEMData</a></code></h4>
+<ul class="">
+<li><code><a title="pearpy.distal_inundation.DEMData.array" href="#pearpy.distal_inundation.DEMData.array">array</a></code></li>
+<li><code><a title="pearpy.distal_inundation.DEMData.cell_diagonal" href="#pearpy.distal_inundation.DEMData.cell_diagonal">cell_diagonal</a></code></li>
+<li><code><a title="pearpy.distal_inundation.DEMData.cell_width" href="#pearpy.distal_inundation.DEMData.cell_width">cell_width</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pearpy.distal_inundation.PlanimetricData" href="#pearpy.distal_inundation.PlanimetricData">PlanimetricData</a></code></h4>
+<ul class="two-column">
+<li><code><a title="pearpy.distal_inundation.PlanimetricData.array" href="#pearpy.distal_inundation.PlanimetricData.array">array</a></code></li>
+<li><code><a title="pearpy.distal_inundation.PlanimetricData.cross_area" href="#pearpy.distal_inundation.PlanimetricData.cross_area">cross_area</a></code></li>
+<li><code><a title="pearpy.distal_inundation.PlanimetricData.cross_area_ori" href="#pearpy.distal_inundation.PlanimetricData.cross_area_ori">cross_area_ori</a></code></li>
+<li><code><a title="pearpy.distal_inundation.PlanimetricData.last_count" href="#pearpy.distal_inundation.PlanimetricData.last_count">last_count</a></code></li>
+<li><code><a title="pearpy.distal_inundation.PlanimetricData.pop_cross" href="#pearpy.distal_inundation.PlanimetricData.pop_cross">pop_cross</a></code></li>
+<li><code><a title="pearpy.distal_inundation.PlanimetricData.previous_count" href="#pearpy.distal_inundation.PlanimetricData.previous_count">previous_count</a></code></li>
+<li><code><a title="pearpy.distal_inundation.PlanimetricData.restore" href="#pearpy.distal_inundation.PlanimetricData.restore">restore</a></code></li>
+<li><code><a title="pearpy.distal_inundation.PlanimetricData.value" href="#pearpy.distal_inundation.PlanimetricData.value">value</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pearpy.distal_inundation.StartPoint" href="#pearpy.distal_inundation.StartPoint">StartPoint</a></code></h4>
+<ul class="">
+<li><code><a title="pearpy.distal_inundation.StartPoint.coordinate" href="#pearpy.distal_inundation.StartPoint.coordinate">coordinate</a></code></li>
+<li><code><a title="pearpy.distal_inundation.StartPoint.to_rowcol" href="#pearpy.distal_inundation.StartPoint.to_rowcol">to_rowcol</a></code></li>
+<li><code><a title="pearpy.distal_inundation.StartPoint.volume" href="#pearpy.distal_inundation.StartPoint.volume">volume</a></code></li>
+<li><code><a title="pearpy.distal_inundation.StartPoint.x" href="#pearpy.distal_inundation.StartPoint.x">x</a></code></li>
+<li><code><a title="pearpy.distal_inundation.StartPoint.y" href="#pearpy.distal_inundation.StartPoint.y">y</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

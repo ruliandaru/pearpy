@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>pearpy.textfile API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>pearpy.textfile</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from typing import List, Tuple
+
+
+py_xxsecta: List[Tuple[str, int, int]] = [
+    (&#34;Osceola&#34;, 4000000000, 150000),
+    (&#34;Electron&#34;, 250000000, 37000),
+    (&#34;DeadManFlat&#34;, 180000000, 14000),
+    (&#34;National&#34;, 150000000, 10000),
+    (&#34;Zigzag&#34;, 73000000, 12000),
+    (&#34;KautzCreek&#34;, 40000000, 5000),
+    (&#34;Azufrado&#34;, 40000000, 2300),
+    (&#34;MolinosNereidas&#34;, 30000000, 1100),
+    (&#34;Guali&#34;, 16000000, 2000),
+    (&#34;Tahoma&#34;, 15000000, 19000),
+    (&#34;PineCreek&#34;, 14000000, 2100),
+    (&#34;SFToutle&#34;, 12000000, 1500),
+    (&#34;Mabinit&#34;, 1200000, 200),
+    (&#34;TahomaCreek&#34;, 600000, 190),
+    (&#34;BlueLake&#34;, 380000, 320),
+    (&#34;ButteCanyon&#34;, 380000, 300),
+    (&#34;MabinitTyphoonSaling&#34;, 300000, 200),
+    (&#34;PolallieCreek&#34;, 80000, 300),
+]
+
+py_xxplanb: List[Tuple[str, int, int]] = [
+    (&#34;Osceola&#34;, 4000000000, 550000000),
+    (&#34;Tetelzingo&#34;, 1800000000, 140000000),
+    (&#34;Electron&#34;, 250000000, 60000000),
+    (&#34;RoundPass&#34;, 200000000, 50000000),
+    (&#34;DeadManFlat&#34;, 180000000, 90000000),
+    (&#34;National&#34;, 150000000, 78000000),
+    (&#34;Paradise&#34;, 100000000, 34000000),
+    (&#34;Zigzag&#34;, 73000000, 55000000),
+    (&#34;TroutLake&#34;, 66000000, 27000000),
+    (&#34;MiddleNooksack&#34;, 50000000, 20000000),
+    (&#34;KautzCreek&#34;, 40000000, 4500000),
+    (&#34;Azufrado&#34;, 40000000, 34000000),
+    (&#34;MolinosNereidas&#34;, 30000000, 6000000),
+    (&#34;Guali&#34;, 16000000, 11000000),
+    (&#34;SaltCreek&#34;, 15000000, 16000000),
+    (&#34;Tahoma&#34;, 15000000, 6000000),
+    (&#34;PineCreek&#34;, 14000000, 18000000),
+    (&#34;SFToutle&#34;, 12000000, 30000000),
+    (&#34;WhitneyCreek&#34;, 4000000, 8000000),
+    (&#34;BolumCreek&#34;, 1500000, 3000000),
+    (&#34;Mabinit&#34;, 1200000, 1800000),
+    (&#34;TahomaCreek&#34;, 600000, 1000000),
+    (&#34;BlueLake&#34;, 380000, 750000),
+    (&#34;ButteCanyon&#34;, 380000, 500000),
+    (&#34;MabinitTyphoonSaling&#34;, 300000, 200000),
+    (&#34;Middle&#34;, 140000, 400000),
+    (&#34;PolallieCreek&#34;, 80000, 470000),
+]
+
+py_xxttabl: List[Tuple[int, float, float, float, float, float, float, float]] = [
+    (1, 1.0, 1.962611, 3.077684, 6.313752, 12.7062, 25.4517, 63.65674),
+    (2, 0.816497, 1.386207, 1.885618, 2.919986, 4.302653, 6.205347, 9.924843),
+    (3, 0.764892, 1.249778, 1.637744, 2.353363, 3.182446, 4.176535, 5.840909),
+    (4, 0.740697, 1.189567, 1.533206, 2.131847, 2.776445, 3.495406, 4.604095),
+    (5, 0.726687, 1.155767, 1.475884, 2.015048, 2.570582, 3.163381, 4.032143),
+    (6, 0.717558, 1.134157, 1.439756, 1.94318, 2.446912, 2.968687, 3.707428),
+    (7, 0.711142, 1.119159, 1.414924, 1.894579, 2.364624, 2.841244, 3.499483),
+    (8, 0.706387, 1.108145, 1.396815, 1.859548, 2.306004, 2.751524, 3.355387),
+    (9, 0.702722, 1.099716, 1.383029, 1.833113, 2.262157, 2.685011, 3.249836),
+    (10, 0.699812, 1.093058, 1.372184, 1.812461, 2.228139, 2.633767, 3.169273),
+    (11, 0.697445, 1.087666, 1.36343, 1.795885, 2.200985, 2.593093, 3.105807),
+    (12, 0.695483, 1.083211, 1.356217, 1.782288, 2.178813, 2.560033, 3.05454),
+    (13, 0.693829, 1.079469, 1.350171, 1.770933, 2.160369, 2.532638, 3.012276),
+    (14, 0.692417, 1.07628, 1.34503, 1.76131, 2.144787, 2.509569, 2.976843),
+    (15, 0.691197, 1.073531, 1.340606, 1.75305, 2.13145, 2.48988, 2.946713),
+    (16, 0.690132, 1.071137, 1.336757, 1.745884, 2.119905, 2.472878, 2.920782),
+    (17, 0.689195, 1.069033, 1.333379, 1.739607, 2.109816, 2.458051, 2.898231),
+    (18, 0.688364, 1.06717, 1.330391, 1.734064, 2.100922, 2.445006, 2.87844),
+    (19, 0.687621, 1.065507, 1.327728, 1.729133, 2.093024, 2.43344, 2.860935),
+    (20, 0.686954, 1.064016, 1.325341, 1.724718, 2.085963, 2.423117, 2.84534),
+    (21, 0.686352, 1.06267, 1.323188, 1.720743, 2.079614, 2.413845, 2.83136),
+    (22, 0.685805, 1.061449, 1.321237, 1.717144, 2.073873, 2.405473, 2.818756),
+    (23, 0.685306, 1.060337, 1.31946, 1.713872, 2.068658, 2.397875, 2.807336),
+    (24, 0.68485, 1.059319, 1.317836, 1.710882, 2.063899, 2.390949, 2.796939),
+    (25, 0.68443, 1.058384, 1.316345, 1.708141, 2.059539, 2.38461, 2.787436),
+    (26, 0.684043, 1.057523, 1.314972, 1.705618, 2.055529, 2.378786, 2.778715),
+    (27, 0.683685, 1.056727, 1.313703, 1.703288, 2.05183, 2.373417, 2.770683),
+    (28, 0.683353, 1.055989, 1.312527, 1.701131, 2.048407, 2.368452, 2.763262),
+    (29, 0.683044, 1.055302, 1.311434, 1.699127, 2.04523, 2.363846, 2.756386),
+    (30, 0.682756, 1.054662, 1.310415, 1.697261, 2.042272, 2.359562, 2.749996),
+    (31, 0.682486, 1.054064, 1.309464, 1.695519, 2.039513, 2.355568, 2.744042),
+    (32, 0.682234, 1.053504, 1.308573, 1.693889, 2.036933, 2.351835, 2.738481),
+    (33, 0.681997, 1.052979, 1.307737, 1.69236, 2.034515, 2.348338, 2.733277),
+    (34, 0.681774, 1.052485, 1.306952, 1.690924, 2.032244, 2.345056, 2.728394),
+    (35, 0.681564, 1.052019, 1.306212, 1.689572, 2.030108, 2.341969, 2.723806),
+    (36, 0.681366, 1.05158, 1.305514, 1.688298, 2.028094, 2.339061, 2.719485),
+    (37, 0.681178, 1.051165, 1.304854, 1.687094, 2.026192, 2.336316, 2.715409),
+    (38, 0.681001, 1.050772, 1.30423, 1.685954, 2.024394, 2.333721, 2.711558),
+    (39, 0.680833, 1.050399, 1.303639, 1.684875, 2.022691, 2.331264, 2.707913),
+    (40, 0.680673, 1.050046, 1.303077, 1.683851, 2.021075, 2.328935, 2.704459),
+    (41, 0.680521, 1.04971, 1.302543, 1.682878, 2.019541, 2.326723, 2.701181),
+    (42, 0.680376, 1.04939, 1.302035, 1.681952, 2.018082, 2.32462, 2.698066),
+    (43, 0.680238, 1.049085, 1.301552, 1.681071, 2.016692, 2.322618, 2.695102),
+    (44, 0.680107, 1.048794, 1.30109, 1.68023, 2.015368, 2.320711, 2.692278),
+]</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="pearpy" href="index.html">pearpy</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>
