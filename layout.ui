@@ -342,10 +342,10 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_14">
               <item>
-               <widget class="QLineEdit" name="lineEdit_2"/>
+               <widget class="QLineEdit" name="surfacehydro_input_later_dsm"/>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton">
+               <widget class="QPushButton" name="surfacehydro_button_later_dsm">
                 <property name="text">
                  <string>open dsm 2</string>
                 </property>
@@ -367,10 +367,10 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_20">
               <item>
-               <widget class="QLineEdit" name="lineEdit_3"/>
+               <widget class="QLineEdit" name="surfacehydro_input_output_folder"/>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_2">
+               <widget class="QPushButton" name="surfacehydro_button_output_folder">
                 <property name="text">
                  <string>open output folder</string>
                 </property>
@@ -385,14 +385,14 @@
             <item>
              <layout class="QVBoxLayout" name="verticalLayout_21">
               <item>
-               <widget class="QLabel" name="label_19">
+               <widget class="QLabel" name="surfacehydro_label_stream_threshold">
                 <property name="text">
                  <string>Stream threshold</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="lineEdit_4">
+               <widget class="QLineEdit" name="surfacehydro_input_stream_threshold">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -413,7 +413,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_3">
+               <widget class="QPushButton" name="surfacehydro_button_run">
                 <property name="text">
                  <string>Create surface hydro!</string>
                 </property>
@@ -424,7 +424,7 @@
            </layout>
           </item>
           <item>
-           <widget class="QProgressBar" name="progressBar">
+           <widget class="QProgressBar" name="surfacehydro_progressbar">
             <property name="maximum">
              <number>100</number>
             </property>

@@ -268,15 +268,15 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_14 = QHBoxLayout()
         self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
-        self.lineEdit_2 = QLineEdit(self.SurfaceHydroPage)
-        self.lineEdit_2.setObjectName(u"lineEdit_2")
+        self.surfacehydro_input_later_dsm = QLineEdit(self.SurfaceHydroPage)
+        self.surfacehydro_input_later_dsm.setObjectName(u"surfacehydro_input_later_dsm")
 
-        self.horizontalLayout_14.addWidget(self.lineEdit_2)
+        self.horizontalLayout_14.addWidget(self.surfacehydro_input_later_dsm)
 
-        self.pushButton = QPushButton(self.SurfaceHydroPage)
-        self.pushButton.setObjectName(u"pushButton")
+        self.surfacehydro_button_later_dsm = QPushButton(self.SurfaceHydroPage)
+        self.surfacehydro_button_later_dsm.setObjectName(u"surfacehydro_button_later_dsm")
 
-        self.horizontalLayout_14.addWidget(self.pushButton)
+        self.horizontalLayout_14.addWidget(self.surfacehydro_button_later_dsm)
 
 
         self.verticalLayout_23.addLayout(self.horizontalLayout_14)
@@ -293,15 +293,15 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_20 = QHBoxLayout()
         self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
-        self.lineEdit_3 = QLineEdit(self.SurfaceHydroPage)
-        self.lineEdit_3.setObjectName(u"lineEdit_3")
+        self.surfacehydro_input_output_folder = QLineEdit(self.SurfaceHydroPage)
+        self.surfacehydro_input_output_folder.setObjectName(u"surfacehydro_input_output_folder")
 
-        self.horizontalLayout_20.addWidget(self.lineEdit_3)
+        self.horizontalLayout_20.addWidget(self.surfacehydro_input_output_folder)
 
-        self.pushButton_2 = QPushButton(self.SurfaceHydroPage)
-        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.surfacehydro_button_output_folder = QPushButton(self.SurfaceHydroPage)
+        self.surfacehydro_button_output_folder.setObjectName(u"surfacehydro_button_output_folder")
 
-        self.horizontalLayout_20.addWidget(self.pushButton_2)
+        self.horizontalLayout_20.addWidget(self.surfacehydro_button_output_folder)
 
 
         self.verticalLayout_24.addLayout(self.horizontalLayout_20)
@@ -313,17 +313,17 @@ class Ui_MainWindow(object):
         self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
         self.verticalLayout_21 = QVBoxLayout()
         self.verticalLayout_21.setObjectName(u"verticalLayout_21")
-        self.label_19 = QLabel(self.SurfaceHydroPage)
-        self.label_19.setObjectName(u"label_19")
+        self.surfacehydro_label_stream_threshold = QLabel(self.SurfaceHydroPage)
+        self.surfacehydro_label_stream_threshold.setObjectName(u"surfacehydro_label_stream_threshold")
 
-        self.verticalLayout_21.addWidget(self.label_19)
+        self.verticalLayout_21.addWidget(self.surfacehydro_label_stream_threshold)
 
-        self.lineEdit_4 = QLineEdit(self.SurfaceHydroPage)
-        self.lineEdit_4.setObjectName(u"lineEdit_4")
-        sizePolicy.setHeightForWidth(self.lineEdit_4.sizePolicy().hasHeightForWidth())
-        self.lineEdit_4.setSizePolicy(sizePolicy)
+        self.surfacehydro_input_stream_threshold = QLineEdit(self.SurfaceHydroPage)
+        self.surfacehydro_input_stream_threshold.setObjectName(u"surfacehydro_input_stream_threshold")
+        sizePolicy.setHeightForWidth(self.surfacehydro_input_stream_threshold.sizePolicy().hasHeightForWidth())
+        self.surfacehydro_input_stream_threshold.setSizePolicy(sizePolicy)
 
-        self.verticalLayout_21.addWidget(self.lineEdit_4)
+        self.verticalLayout_21.addWidget(self.surfacehydro_input_stream_threshold)
 
 
         self.horizontalLayout_22.addLayout(self.verticalLayout_21)
@@ -335,10 +335,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_13.addWidget(self.label_20)
 
-        self.pushButton_3 = QPushButton(self.SurfaceHydroPage)
-        self.pushButton_3.setObjectName(u"pushButton_3")
+        self.surfacehydro_button_run = QPushButton(self.SurfaceHydroPage)
+        self.surfacehydro_button_run.setObjectName(u"surfacehydro_button_run")
 
-        self.verticalLayout_13.addWidget(self.pushButton_3)
+        self.verticalLayout_13.addWidget(self.surfacehydro_button_run)
 
 
         self.horizontalLayout_22.addLayout(self.verticalLayout_13)
@@ -346,12 +346,12 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_19.addLayout(self.horizontalLayout_22)
 
-        self.progressBar = QProgressBar(self.SurfaceHydroPage)
-        self.progressBar.setObjectName(u"progressBar")
-        self.progressBar.setMaximum(100)
-        self.progressBar.setValue(0)
+        self.surfacehydro_progressbar = QProgressBar(self.SurfaceHydroPage)
+        self.surfacehydro_progressbar.setObjectName(u"surfacehydro_progressbar")
+        self.surfacehydro_progressbar.setMaximum(100)
+        self.surfacehydro_progressbar.setValue(0)
 
-        self.verticalLayout_19.addWidget(self.progressBar)
+        self.verticalLayout_19.addWidget(self.surfacehydro_progressbar)
 
 
         self.verticalLayout_20.addLayout(self.verticalLayout_19)
@@ -746,12 +746,12 @@ class Ui_MainWindow(object):
         self.mainpage_label_progressbar_sub.setText(QCoreApplication.translate("MainWindow", u"sub progressbar", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.MainPage), QCoreApplication.translate("MainWindow", u"Main", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"input later dsm (epoch 2)", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"open dsm 2", None))
+        self.surfacehydro_button_later_dsm.setText(QCoreApplication.translate("MainWindow", u"open dsm 2", None))
         self.label_17.setText(QCoreApplication.translate("MainWindow", u"output directory", None))
-        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"open output folder", None))
-        self.label_19.setText(QCoreApplication.translate("MainWindow", u"Stream threshold", None))
+        self.surfacehydro_button_output_folder.setText(QCoreApplication.translate("MainWindow", u"open output folder", None))
+        self.surfacehydro_label_stream_threshold.setText(QCoreApplication.translate("MainWindow", u"Stream threshold", None))
         self.label_20.setText("")
-        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"Create surface hydro!", None))
+        self.surfacehydro_button_run.setText(QCoreApplication.translate("MainWindow", u"Create surface hydro!", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.SurfaceHydroPage), QCoreApplication.translate("MainWindow", u"Surface Hydro", None))
         self.label_15.setText(QCoreApplication.translate("MainWindow", u"input flow direction raster (d8, esri style)", None))
         self.startingpoint_button_flow_directoin.setText(QCoreApplication.translate("MainWindow", u"open flow direction", None))

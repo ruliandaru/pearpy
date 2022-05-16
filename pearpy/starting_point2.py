@@ -1,23 +1,22 @@
-import os
-from dataclasses import dataclass
+"""
+This module contains code to find starting point on each main stream.
+"""
+
 from pathlib import Path
 from shutil import copy2
 from tempfile import TemporaryDirectory
-from typing import Any, Callable, Dict, Generator, List, Optional, Tuple, Union
+from typing import Callable, Generator, List, Optional, Tuple, Union
 
 import fiona
 import geosardine as dine
 import numpy as np
 import rasterio
-import shapely
 import whitebox
-from rasterio import Affine
 from rasterio.features import geometry_mask
 from shapely import geometry, ops, speedups
-from shapely.geometry import LineString, Point
+from shapely.geometry import Point
+from shapely.geometry.base import BaseGeometry
 from tqdm.autonotebook import tqdm
-
-from pearpy.starting_point import find_starting_point
 
 from .custom_types import GeoJsonDict
 
@@ -27,11 +26,23 @@ wbt = whitebox.WhiteboxTools()
 
 
 class StemTooShort(Exception):
+    """Stream/Stem is too short to calculate volume. It is near the start vertex"""
+
+    pass
+
+
+class DifferentCRS(Exception):
+    """two data have different CRS"""
+
     pass
 
 
 class ProcessingData:
-    def __init__(self, flow_direction, flow_stream):
+    """
+    Contains processing data in temporary directory
+    """
+
+    def __init__(self, flow_direction: Path, flow_stream: Path) -> None:
         self.temp_folder = TemporaryDirectory()
         self.temp_path = Path(self.temp_folder.name)
         self.flow_direction = flow_direction
@@ -46,6 +57,7 @@ class ProcessingData:
         self.generate()
 
     def generate(self) -> None:
+        """generate processing data"""
         wbt.find_main_stem(
             self.flow_direction,
             self.flow_stream,
@@ -66,25 +78,61 @@ class ProcessingData:
         print("processing data has been generated")
 
     def save(self, output_directory: Path) -> None:
-        # self.link_class.save(str(output_directory / "link_class.tif"))
+        """Copy processing data to outside temporary directory
+
+        Parameters
+        ----------
+        output_directory : Path
+            directory to copy processing data
+        """
         for f in self.temp_path.glob("*"):
             if f.is_file():
                 copy2(f.absolute(), output_directory)
 
     def cleanup(self) -> None:
+        """remove  temporary directory"""
         self.temp_folder.cleanup()
 
 
 def interpolate_points(
     polyline: geometry.LineString, distance: float = 0.25, upstream: int = 0
 ) -> Generator[geometry.Point, None, None]:
-    interpolate_distances = np.arange(polyline.length // distance) * distance
-    interpolate_distances = np.append(interpolate_distances, polyline.length)
+    """interpolate points along line
+
+    Parameters
+    ----------
+    polyline : geometry.LineString
+        stream
+    distance : float, optional
+        interpolation distance, by default 0.25
+    upstream : int, optional
+        [description], by default 0
+
+    Yields
+    -------
+    Generator[geometry.Point, None, None]
+        interpolated points
+    """
+    interpolate_distances = np.arange((polyline.length // distance) + 1)
     for interpolate_distance in interpolate_distances:
         yield polyline.interpolate(interpolate_distance)
 
 
 def estimate_volume(array: np.ndarray, dsm_diff: dine.Raster) -> float:
+    """estimate volume
+
+    Parameters
+    ----------
+    array : np.ndarray
+        clipped dsm difference of 2 epoch by buffered starting point
+    dsm_diff : dine.Raster
+        dsm difference of 2 epoch
+
+    Returns
+    -------
+    float
+        volume
+    """
     return float(
         np.sum(array[(array > dsm_diff.no_data) & (array > 0)]) * dsm_diff.resolution[0]
     )
@@ -96,31 +144,83 @@ def calculate_volume_stem(
     dsm_diff: "dine.Raster",
     stream_buffer_size: float,
 ) -> float:
-    splited = ops.split(stem, point.buffer(0.1))
-    if splited[0].length < dsm_diff.resolution[0] * 5:
+    """Calculate stem by buffering the stem
+
+    Parameters
+    ----------
+    stem : geometry.LineString
+        stream
+    point : geometry.Point
+        starting point
+    dsm_diff : dine.Raster
+        dsm difference of 2 epoch
+    stream_buffer_size : float
+        buffer length for stream
+
+    Returns
+    -------
+    float
+        volume
+
+    Raises
+    ------
+    StemTooShort
+        stem is below 5 times spatial resolution which will caused too small volume
+    """
+    splitted = ops.split(stem, point.buffer(0.1))
+    if splitted[0].length < dsm_diff.resolution[0] * 5:
         raise StemTooShort
     mask = geometry_mask(
-        [geometry.mapping(splited[0].buffer(stream_buffer_size))],
+        [geometry.mapping(splitted[0].buffer(stream_buffer_size))],
         transform=dsm_diff.transform,
         out_shape=dsm_diff.shape[:2],
     )
-    return (
-        dsm_diff.array[
-            (~mask.reshape(mask.shape[0], mask.shape[1], 1))
-            & (dsm_diff > 0)
-            & (dsm_diff != dsm_diff.no_data)
-        ]
-        * dsm_diff.resolution[0]
-    ).sum()
+    return float(
+        (
+            dsm_diff.array[
+                (~mask.reshape(mask.shape[0], mask.shape[1], 1))
+                & (dsm_diff > 0)
+                & (dsm_diff != dsm_diff.no_data)
+            ]
+            * dsm_diff.resolution[0]
+        ).sum()
+    )
 
 
 def find_starting_point(
     stem: geometry.LineString,
-    ditance: float,
+    distance: float,
     dsm_diff: "dine.Raster",
     link_class: "dine.Raster",
     stream_buffer_size: float,
 ) -> Tuple[Optional[geometry.Point], Optional[float]]:
+    """find starting point over main stem
+
+    Parameters
+    ----------
+    stem : geometry.LineString
+        main stem
+    distance : float
+        interpolation distance
+    dsm_diff : dine.Raster
+        dsm difference of 2 epoch
+    link_class : dine.Raster
+        stream link class
+    stream_buffer_size : float
+        buffer length for stream
+
+    Returns
+    -------
+    Tuple[Optional[geometry.Point], Optional[float]]
+        Starting point and volume
+        if geometry.Point & float, there is starting point
+        if None & None, there isn't any starting point
+
+    Raises
+    ------
+    ValueError
+        Wrong type
+    """
 
     if stem.length < 100:
         return None, None
@@ -129,7 +229,7 @@ def find_starting_point(
     buffer_area = (buffer_pixel * 2) ** 2
     minimum_pixel = buffer_area * 0.5
 
-    point_in_stem = interpolate_points(stem, ditance)
+    point_in_stem = interpolate_points(stem, distance)
 
     sp_candidates: List[geometry.Point] = []
     sp_candidates_junction: List[geometry.Point] = []
@@ -147,27 +247,36 @@ def find_starting_point(
                 ]
             )
 
-            if np.all(bounding_box > 0) and dsm_diff.array[row, col] > 0:
-                buffered_point = dsm_diff.array[
+            deposition_pixel_count: int = np.sum(
+                dsm_diff.array[
                     bounding_box[0] : bounding_box[2], bounding_box[1] : bounding_box[3]
                 ]
-                deposition_pixel_count: int = (buffered_point > 0).sum()
-                if deposition_pixel_count > minimum_pixel:
-                    if link_class.xy_value(point.x, point.y)[0] == 4:
-                        sp_candidates_junction.append(point)
-                    else:
-                        sp_candidates.append(point)
+                > 0
+            )
 
-    if len(sp_candidates_junction) > 0:
+            if (
+                np.all(bounding_box > 0)
+                and dsm_diff.array[row, col] > 0
+                and deposition_pixel_count > minimum_pixel
+            ):
+                link_type = link_class.xy_value(point.x, point.y)
+
+                if not isinstance(link_type, np.ndarray):
+                    raise ValueError("Unexpected")
+
+                if link_type[0] == 4:
+                    sp_candidates_junction.append(point)
+                else:
+                    sp_candidates.append(point)
+    starting_point = None
+    if sp_candidates_junction:
         starting_point = sp_candidates_junction[-1]
-    elif len(sp_candidates) > 0:
+    elif sp_candidates:
         starting_point = sp_candidates[-1]
-    else:
-        starting_point = None
 
     if starting_point is not None:
         try:
-            volume = calculate_volume_stem(
+            volume: Optional[float] = calculate_volume_stem(
                 stem, starting_point, dsm_diff, stream_buffer_size
             )
         except StemTooShort:
@@ -205,13 +314,53 @@ def find_starting_points(
     return_processing_data: bool = False,
     progress_callback: Optional[Callable[[int, int], None]] = None,
 ) -> Tuple[List[Tuple[Point, float]], Optional[ProcessingData]]:
+    """Batch find starting point for streams
+
+    Parameters
+    ----------
+    input_earlier_dsm : str
+        earlier dsm (first epoch) location
+    input_later_dsm : str
+        later dsm (second epoch) location
+    input_flow_direction : str
+        flow direction location d8-esri-style
+    input_flow_stream : str
+        flow stream location
+    max_percent_length : float
+        maximum percentage of stream to be included
+    stream_buffer_size : float
+        buffer length for stream
+    return_processing_data : bool, optional
+        return processing data as variable, by default False
+    progress_callback : Optional[Callable[[int, int], None]], optional
+        callback to be called after each loop, by default None
+
+    Returns
+    -------
+    Tuple[List[Tuple[Point, float]], Optional[ProcessingData]]
+        starting point, volume & processing data
+        if Tuple[List[Tuple[Point, float]], ProcessingData], processing data is returned
+        if Tuple[List[Tuple[Point, float]], None], processing data is not returned
+
+    Raises
+    ------
+    ValueError
+        Different CRS
+    ValueError
+        Wrong type
+    e
+        There is any exception raised
+    """
     if progress_callback is not None:
         progress_callback(0, 0)
-    processing_data = ProcessingData(input_flow_direction, input_flow_stream)
+
+    processing_data = ProcessingData(
+        Path(input_flow_direction), Path(input_flow_stream)
+    )
 
     try:
         print(processing_data.main_stem_vectorfile)
-        print("r",input_earlier_dsm, input_later_dsm)
+        print("r", input_earlier_dsm, input_later_dsm)
         with fiona.open(processing_data.main_stem_vectorfile) as lines, rasterio.open(
             input_earlier_dsm
         ) as earlier_dsm, rasterio.open(input_later_dsm) as later_dsm:
@@ -239,7 +388,7 @@ def find_starting_points(
 
             progress_total = len(features)
 
-            for i, feature in tqdm(features, total=len(features)):
+            for i, feature in tqdm(features, total=progress_total):
 
                 line = feature["geometry"]["coordinates"]
                 if later_dsm.xy_value(
@@ -249,6 +398,9 @@ def find_starting_points(
 
                 stem = geometry.LineString(line)
                 stem = ops.substring(stem, 0, stem.length * max_percent_length / 100)
+
+                # if isinstance(stem, BaseGeometry) or processing_data.link_class is None:
+                #     raise ValueError("Unexpected")
 
                 starting_point, volume = find_starting_point(
                     stem, 0.25, dsm_diff, processing_data.link_class, stream_buffer_size
@@ -280,6 +432,15 @@ def find_starting_points(
 def save2txt(
     starting_points: List[Tuple[Point, float]], output_location: Union[Path, str]
 ) -> None:
+    """Save starting points and volume as csv
+
+    Parameters
+    ----------
+    starting_points : List[Tuple[Point, float]]
+        list of starting point as Point and volume
+    output_location : Union[Path, str]
+        location to save starting point
+    """
     with open(output_location, "w") as out:
         for starting_point, volume in starting_points:
             out.writelines(f"{starting_point.x},{starting_point.y},{volume}\n")

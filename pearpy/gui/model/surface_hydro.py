@@ -11,6 +11,7 @@ class SurfaceHydroModel:
     flow_accumulation: Path = Path()
     stream_raster: Path = Path()
     stream_value: int = 250
+    output_directory: Path = Path()
 
     @property
     def args(self) -> Tuple[Path, Path, Path, Path, Path, int]:

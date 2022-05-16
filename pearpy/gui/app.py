@@ -6,9 +6,11 @@ from typing import Any
 from pearpy.gui.model.inundation_zone import InundationModel
 from pearpy.gui.model.main import MainModel
 from pearpy.gui.model.starting_point import StartingPointModel
+from pearpy.gui.model.surface_hydro import SurfaceHydroModel
 from pearpy.gui.view.inundation_zone import InundationView
 from pearpy.gui.view.main import MainView
 from pearpy.gui.view.starting_point import StartingPointView
+from pearpy.gui.view.surface_hydro import SurfaceHydroView
 from PySide2.QtWidgets import QApplication
 
 
@@ -21,6 +23,7 @@ class App(QApplication):
             StartingPointModel(), self.main_view
         )
         self.inundation_zone_view = InundationView(InundationModel(), self.main_view)
+        self.surface_hydro_view = SurfaceHydroView(SurfaceHydroModel(), self.main_view)
         self.main_view.show()
 
 

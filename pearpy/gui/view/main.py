@@ -8,7 +8,8 @@ from pearpy.gui.thread._thread import SignalDict
 from pearpy.gui.thread.main import MainPageThread
 from pearpy.gui.view.layout import Ui_MainWindow
 from PySide2.QtCore import QObject, QThreadPool, Slot
-from PySide2.QtWidgets import QApplication, QFileDialog, QMainWindow, QMessageBox
+from PySide2.QtWidgets import (QApplication, QFileDialog, QMainWindow,
+                               QMessageBox)
 
 
 class MainView(QMainWindow):
@@ -161,7 +162,6 @@ class MainView(QMainWindow):
     def on_error_signal(self, value: str) -> None:
         self.enable_ui()
         self.show_error(value)
-        # self._thread.stop()
         self.root_app.aboutToQuit.disconnect()
 
     @Slot(object)
@@ -169,9 +169,6 @@ class MainView(QMainWindow):
         self.ui.mainpage_label_progressbar_sub.setText(value["description"])
         self.ui.mainpage_progressbar_sub.setMaximum(value["progress_total"])
         self.ui.mainpage_progressbar_sub.setValue(value["progress_current"])
-        # self.ui.mainpage_progressbar_sub.setValue(
-        #     self.ui.mainpage_progressbar_sub.value() + 1
-        # )
 
     @Slot(str)
     def on_thread_finished(self) -> None:
@@ -215,7 +212,6 @@ class MainView(QMainWindow):
             self.ui.mainpage_input_output_folder.setText(str(directory))
 
     def run_thread(self) -> None:
-        # self._thread = MainPageThread(self.model)
         self._thread = MainPageThread(self.model, self)
         self.ui.mainpage_progressbar_overall.setValue(0)
         self.ui.mainpage_progressbar_overall.setMaximum(3)

@@ -1,14 +1,13 @@
 import traceback
 from datetime import datetime
 
-from pearpy.create_surface_hydro import _create_surface_hydro
-from pearpy.distal_inundation import batch_lahar_inundation
+from pearpy.create_surface_hydro import create_surface_hydro
 from pearpy.gui.model.surface_hydro import SurfaceHydroModel
 from pearpy.gui.thread._thread import CustomThread, SignalDict, ThreadSignals
 from PySide2.QtWidgets import QMainWindow
 
 
-class InundationThread(CustomThread):
+class SurfaceHydroThread(CustomThread):
     def __init__(self, model: SurfaceHydroModel, parent: QMainWindow) -> None:
         super().__init__(parent)
         self.signals = ThreadSignals()
@@ -28,7 +27,12 @@ class InundationThread(CustomThread):
             raise KeyboardInterrupt("stop by user request")
 
     def _run(self) -> None:
-        _create_surface_hydro(*self.model.args, self._progress_callback)
+        create_surface_hydro(
+            self.model.input_dem,
+            self.model.output_directory,
+            self.model.stream_value,
+            self._progress_callback,
+        )
 
     def _do_work(self) -> None:
         try:

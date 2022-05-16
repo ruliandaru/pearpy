@@ -2,7 +2,7 @@ from collections import OrderedDict
 from dataclasses import dataclass, field
 from math import log10, sqrt
 from pathlib import Path
-from typing import Callable, Dict, List, Optional, Tuple, Union
+from typing import Callable, Dict, Final, List, Optional, Tuple, Union
 
 import fiona
 import numpy as np
@@ -13,30 +13,6 @@ from tqdm.autonotebook import tqdm
 from pearpy.custom_types import RasterioMeta
 
 from .textfile import py_xxplanb, py_xxsecta, py_xxttabl
-
-
-def text2list(file_name: str) -> List[List[float]]:
-    """Parse coordinate and volume into list
-
-    Parameters
-    ----------
-    file_name : str
-        coordinate and volume file
-
-    Returns
-    -------
-    List[List[float]]
-        [[coordinate_x, coordinate_y, volume]]
-    """
-    with open(file_name) as input_file:
-        dataset: List[List[float]] = [
-            [round(float(coordinate)) for coordinate in line.split(",")]
-            for line in input_file
-            if "," in line
-        ]
-
-    return sorted(dataset)
-
 
 cardinal_first = {32: (16, 64), 128: (64, 1), 2: (1, 4), 8: (4, 16)}
 cardinal_second = {1: (128, 2), 4: (2, 8), 16: (8, 32), 64: (32, 128)}
@@ -93,18 +69,15 @@ next_cell: Dict[int, Tuple[int, int]] = {
 
 
 class CrossSectionTooLong(Exception):
-    """Exception called if volume is too big which caused the cross section too long.
+    """Exception called if volume is too big which caused the cross section too long."""
 
-    Parameters
-    ----------
-    Exception : [type]
-        [description]
-    """
     pass
 
 
 @dataclass
 class DEMData:
+    """contain dem array and its cell size"""
+
     array: np.ndarray
     cell_diagonal: float
     cell_width: float
@@ -112,8 +85,8 @@ class DEMData:
 
 @dataclass
 class PlanimetricData:
-    """Planimetric area information and function
-    """
+    """Planimetric area information and function"""
+
     value: List[float]
     array: np.ndarray
     cross_area: List[float]
@@ -122,13 +95,11 @@ class PlanimetricData:
     last_count: int = 0
 
     def __post_init__(self) -> None:
-        """create a copy of original to reset the data after move downward
-        """
+        """create a copy of original to reset the data after move downward"""
         self.cross_area_ori = self.cross_area.copy()
 
     def restore(self) -> None:
-        """reset the data after move downward
-        """
+        """reset the data after move downward"""
         self.cross_area = self.cross_area_ori.copy()
 
     def pop_cross(self) -> None:
@@ -140,7 +111,7 @@ class PlanimetricData:
 def calc_area(
     volume_list: Union[List[int], List[float]], coefficient: float
 ) -> List[float]:
-    """calculatte the planimetric area based on volume
+    """calculate the planimetric area based on volume
 
     Parameters
     ----------
@@ -255,20 +226,21 @@ def append_point2array(
     row: int, col: int, planimetrics: PlanimetricData
 ) -> PlanimetricData:
     """
+    add or reduce the cross area
 
     Parameters
     ----------
     row : int
-        [description]
+        cell row
     col : int
-        [description]
+        cell column
     planimetrics : PlanimetricData
-        [description]
+        planimetric (cros and long section) data
 
     Returns
     -------
     PlanimetricData
-        [description]
+        planimetric (cros and long section) data
     """
     cross_area_count = len(planimetrics.cross_area) + 1
     dem_value = planimetrics.array[row, col]
@@ -339,7 +311,7 @@ def create_cross_area(
     cross_areas: List[float],
     cell_count: int = 1,
 ) -> List[float]:
-    """calculate the cross area of lahar inundation
+    """calculate the area of cross section of lahar inundation
 
     Parameters
     ----------
@@ -375,6 +347,29 @@ def calc_cross_section(
     row_col: Tuple[int, int],
     planimetrics: PlanimetricData,
 ) -> PlanimetricData:
+    """Calculate cross section
+
+    Parameters
+    ----------
+    dem : DEMData
+        Later DEM array and cell size
+    flow_direction : int
+        current cell flow dire tion
+    row_col : Tuple[int, int]
+        current row column
+    planimetrics : PlanimetricData
+        planimetric (cros and long section) data
+
+    Returns
+    -------
+    PlanimetricData
+        planimetric (cros and long section) data
+
+    Raises
+    ------
+    ValueError
+        flow direction is not a valid d8. possibly sink or out of region
+    """
     cell_dimension = dem.cell_width
     if flow_direction in [8, 128, 2, 32]:
         cell_dimension = dem.cell_diagonal
@@ -382,7 +377,9 @@ def calc_cross_section(
     right_x, right_y = row_col
 
     if flow_direction not in [1, 2, 4, 8, 16, 32, 64, 128]:
-        raise ValueError(f"out of bound, direction: {flow_direction}")
+        raise ValueError(
+            f"flow direction is not a valid d8. possibly sink or out of region, direction: {flow_direction}"
+        )
     left_x, left_y = left_cell[flow_direction](right_x, right_y)
 
     try:
@@ -499,25 +496,23 @@ def calc_cross_section(
     return planimetrics
 
 
-def read_volumes(volume_file: Union[Path, str]) -> List[int]:
-    with open(volume_file) as volume_reader:
-        volumes = [round(float(line)) for line in volume_reader]
-    return volumes
-
-
-# def read_coordinates(coordinates_file: Union[Path, str]) -> List[List[int]]:
-#     with open(coordinates_file) as coordinate_reader:
-#         coordinates = []
-#         for line in coordinate_reader:
-#             if "," in line:
-#                 coordinate = [round(float(c)) for c in line.split(",")]
-#                 coordinates.append(coordinate)
-#     return sorted(coordinates)
-
-
 def calc_cross_planimetric(
     volumes: List[int], confidence_limit: float
 ) -> Tuple[List[float], List[float]]:
+    """calculate the planimetric and cross section area based on volume
+
+    Parameters
+    ----------
+    volumes : List[int]
+        lahar volume
+    confidence_limit : float
+        confidence limit to be used
+
+    Returns
+    -------
+    Tuple[List[float], List[float]]
+        cross section and planimetric area
+    """
     cross_section_areas = calc_area(volumes, 0.05)
     planimetric_areas = calc_area(volumes, 200)
 
@@ -585,6 +580,31 @@ def create_lahar_inundation(
     direction_array: np.ndarray,
     confidence_limit: Union[int, float],
 ) -> Tuple[PlanimetricData, List[float]]:
+    """Create lahar inundation area
+
+    Parameters
+    ----------
+    start_point : StartPoint
+        starting point
+    dem : DEMData
+        planimetric (cros and long section) data
+    direction_array : np.ndarray
+        d8 flow direction as numpy array
+    confidence_limit : Union[int, float]
+        confidence limit
+
+    Returns
+    -------
+    Tuple[PlanimetricData, List[float]]
+        [description]
+
+    Raises
+    ------
+    CrossSectionTooLong
+        [description]
+    CrossSectionTooLong
+        [description]
+    """
     cross_section_areas, planimetric_areas = calc_cross_planimetric(
         [start_point.volume], confidence_limit
     )
@@ -707,6 +727,23 @@ def save_result(
     schema: RasterioMeta,
     format: str,
 ) -> None:
+    """[summary]
+
+    Parameters
+    ----------
+    inundation : np.ndarray
+        [description]
+    volume : int
+        [description]
+    output_folder : Path
+        [description]
+    index : int
+        [description]
+    schema : RasterioMeta
+        [description]
+    format : str
+        [description]
+    """
     if format == "raster":
         with rasterio.open(
             output_folder / f"stream_{index}_{volume}.tif", "w", **schema
@@ -740,6 +777,30 @@ def _batch_lahar_inundation(
     output_type: str = "multi_vector",
     progress_callback: Optional[Callable[[int, int], None]] = None,
 ) -> None:
+    """[summary]
+
+    Parameters
+    ----------
+    input_raster : str
+        [description]
+    start_points : List[StartPoint]
+        [description]
+    confidence_limit : float
+        [description]
+    output_folder : str, optional
+        [description], by default ""
+    output_type : str, optional
+        [description], by default "multi_vector"
+    progress_callback : Optional[Callable[[int, int], None]], optional
+        [description], by default None
+
+    Raises
+    ------
+    ValueError
+        [description]
+    ValueError
+        [description]
+    """
     raster_path = Path(input_raster)
     basename = raster_path.name
 
@@ -845,12 +906,10 @@ def _batch_lahar_inundation(
                 output_type,
             )
 
-            # with rasterio.open(
-            #     output_stream / f"stream_{i}_{start_point.volume}.tif", "w", **schema
-            # ) as output:
-            #     output.write(planimetrics.array, 1)
         else:
-            print(f"skipping point {i}. volume is below minimum")
+            print(
+                f"point {i} skipped. volume: {start_point.volume} is below minimum: 32"
+            )
 
         if progress_callback is not None:
             progress_callback(progress_total, i + 1)

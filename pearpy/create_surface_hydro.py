@@ -17,7 +17,7 @@ def _create_surface_hydro(
     stream_value: int,
     progress_callback: Optional[Callable[[int, int], None]] = None,
 ) -> None:
-    """Create surface hidrology data which is needed to generate inundation area.
+    """Create surface hydrology data which is needed to generate inundation area.
 
     Parameters
     ----------
@@ -50,16 +50,23 @@ def _create_surface_hydro(
         out_accumulation, out_stream_raster, stream_value, zero_background=True
     )
 
+    wbt.raster_streams_to_vector(
+        out_stream_raster,
+        out_direction,
+        out_stream_raster.parent.absolute() / f"{out_stream_raster.stem}.shp",
+        esri_pntr=True,
+    )
+
 
 def generate_output_filenames(
     output_path: Path, input_dem: Path, stream_value: int
 ) -> Tuple[Path, Path, Path, Path]:
-    """generate output filename for each surface hidrology which is needed to generate inundation area.
+    """generate output filename for each surface hydrology which is needed to generate inundation area.
 
     Parameters
     ----------
     output_path : Path
-        output folder 
+        output folder
     input_dem : Path
         dem file location
     stream_value : int
@@ -83,7 +90,7 @@ def create_surface_hydro(
     output_directory: Union[str, Path],
     stream_value: int,
     progress_callback: Optional[Callable[[int, int], None]] = None,
-):
+) -> None:
     """Wrapper to create surface hydrology file
 
     Parameters

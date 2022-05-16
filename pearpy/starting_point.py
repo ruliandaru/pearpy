@@ -1,3 +1,7 @@
+"""
+This module contains code to find starting point on each main stream. (old-style)
+"""
+
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Dict, Generator, List, Optional, Tuple, Union

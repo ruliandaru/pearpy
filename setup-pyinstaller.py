@@ -15,27 +15,31 @@ if __name__ == "__main__":
     name = pyproject["tool"]["poetry"]["name"]
     version = pyproject["tool"]["poetry"]["version"]
 
+    hidden_imports = [
+        "--hidden-import=rasterio._shim",
+        "--hidden-import=rasterio.rpc",
+        "--hidden-import=rasterio.control",
+        "--hidden-import=rasterio.sample",
+        "--hidden-import=rasterio.vrt",
+        "--hidden-import=rasterio._features",
+        "--hidden-import=fiona._shim",
+        "--hidden-import=fiona.schema",
+        "--hidden-import=fiona.ogrext",
+        "--hidden-import=pyproj",
+        "--add-data=whitebox/img/*;whitebox/img/",
+        "--add-data=whitebox/WBT/whitebox_tools.exe;whitebox/",
+        "--add-data=whitebox/WBT/*;whitebox/",
+        "--add-data=whitebox/WBT/img/*;whitebox/WBT/img/",
+        "--add-data=whitebox/testdata/*;whitebox/testdata/",
+        os.path.join("pearpy/gui/", "__main__.py"),
+    ]
+
     if args.dev:
         flags = [
             f"--name={name}-dev",
             "--debug=imports",
             "--noconfirm",
-            "--hidden-import=rasterio._shim",
-            "--hidden-import=rasterio.control",
-            "--hidden-import=rasterio.sample",
-            "--hidden-import=rasterio.vrt",
-            "--hidden-import=rasterio.rpc",
-            "--hidden-import=rasterio._features",
-            "--hidden-import=fiona._shim",
-            "--hidden-import=fiona.schema",
-            "--hidden-import=pyproj",
-            "--add-data=whitebox/img/*;whitebox/img/",
-            "--add-data=whitebox/WBT/whitebox_tools.exe;whitebox/",
-            "--add-data=whitebox/WBT/*;whitebox/",
-            "--add-data=whitebox/WBT/img/*;whitebox/WBT/img/",
-            "--add-data=whitebox/testdata/*;whitebox/testdata/",
-            os.path.join("pearpy/gui/", "__main__.py"),
-        ]
+        ] + hidden_imports
     else:
         flags = [
             f"--name={name}-v{version}",
@@ -43,19 +47,5 @@ if __name__ == "__main__":
             "--noconfirm",
             # "--noconsole",
             # "--windowed",
-            "--hidden-import=rasterio._shim",
-            "--hidden-import=rasterio.control",
-            "--hidden-import=rasterio.sample",
-            "--hidden-import=rasterio.vrt",
-            "--hidden-import=rasterio._features",
-            "--hidden-import=fiona._shim",
-            "--hidden-import=fiona.schema",
-            "--hidden-import=pyproj",
-            "--add-data=whitebox/img/*;whitebox/img/",
-            "--add-data=whitebox/WBT/whitebox_tools.exe;whitebox/",
-            "--add-data=whitebox/WBT/*;whitebox/",
-            "--add-data=whitebox/WBT/img/*;whitebox/WBT/img/",
-            "--add-data=whitebox/testdata/*;whitebox/testdata/",
-            os.path.join("pearpy/gui/", "__main__.py"),
-        ]
+        ] + hidden_imports
     PyInstaller.__main__.run(flags)
